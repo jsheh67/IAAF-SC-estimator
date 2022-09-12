@@ -12,6 +12,7 @@ function Calculator({resultList, setResultList}){
                 "1 mile", "2000m", "3000m" ];
     
     const hundredStats={"min":16.79, "A":30.417, "c":1.92}
+    const twoHundredStats={"min":35.05, "A":6.606, "c":1.925}
 
     const eventSelectionFactory=()=>{
         return(events.map(e=>{
@@ -32,46 +33,52 @@ function Calculator({resultList, setResultList}){
         return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
     }
 
+    // onSubmit={handleSubmit(onSubmit)}
 
-
-    const onSubmit=(OBJ)=>{
+    const onSubmitCalcPoints=(OBJ)=>{
         OBJ.time = parseFloat(OBJ.time);
         console.log(OBJ.points)
-        if(OBJ.points.length===0){
+
         switch(OBJ.event){
             case "100 m":
                 OBJ.points=calcPoints(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.time);
                 break;
             case "200m":
-                OBJ.points=200;
+                OBJ.points=calcPoints(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.time);
                 break;
             case"300m":
                 OBJ.points=300;
                 break;
-
         }
-        }else{
-            switch(OBJ.event){
-                case "100 m":
-                    OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
-                    break;
-                case "200m":
-                    OBJ.points=200;
-                    break;
-                case"300m":
-                    OBJ.points=300;
-                    break;
-            }
-        }
-       
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
     }
+
+
+    const onSubmitCalcTime=(OBJ)=>{
+        switch(OBJ.event){
+            case "100 m":
+                OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
+                break;
+            case "200m":
+                OBJ.time=calcTime(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.points);
+                break;
+            case"300m":
+                OBJ.points=300;
+                break;
+        }
+        console.log(OBJ);
+        setResultList([OBJ,...resultList]);
+        console.log(resultList);
+    }
+       
+        
+
     
     return(
         <div className="container-md">
-            <form onSubmit={handleSubmit(onSubmit)} id="calculate-points-form">
+            <form id="calculate-points-form">
                 <div className="form-group py-1">
                     <label className="form-label" htmlFor="selectEvent">Select Event</label>
                     <select className="form-control" id="selectEvent"
@@ -99,14 +106,14 @@ function Calculator({resultList, setResultList}){
                 <div className="form-group py-3 col-6">
                     <label className="form-label" htmlFor="time">Enter Time</label>
                     <input type="text"  className="form-control" placeholder="mm:ss.ms"
-                        // pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
+                        pattern="([01]\d|2[0-3])(:[0-5]\d){2}:\d{1,3}"
                         {...register("time")}/>
 
                 </div>
 
                 <div className="form-group py-3 col-6">
                     <label className="form-label" htmlFor="time">Enter Points</label>
-                    <input type="text"  className="form-control" placeholder=""
+                    <input type="number"  className="form-control" placeholder=""
                         // pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
                         {...register("points")}/>
 
@@ -114,8 +121,8 @@ function Calculator({resultList, setResultList}){
                 </div>
 
                 <div className="row">
-                <button   type="submit" className="btn col mx-3">Calculate Points</button>
-                <button  type="submit" className="btn col mx-3">Calculate Time</button>
+                <button  onClick={handleSubmit(onSubmitCalcPoints)} type="submit" className="btn col mx-3">Calculate Points</button>
+                <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn col mx-3">Calculate Time</button>
                 </div>
             </form>
 
