@@ -4,7 +4,7 @@ import ResultTable from "./ResultTable";
 
 function Calculator({resultList, setResultList}){
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
       });
 
@@ -28,9 +28,16 @@ function Calculator({resultList, setResultList}){
         // return (a*(Math.pow((time-min),c)));
     }
 
+    const calcTime=(min, a, c,points)=>{
+        return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
+    }
+
+
+
     const onSubmit=(OBJ)=>{
         OBJ.time = parseFloat(OBJ.time);
         console.log(OBJ.points)
+        if(OBJ.points.length===0){
         switch(OBJ.event){
             case "100 m":
                 OBJ.points=calcPoints(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.time);
@@ -42,6 +49,19 @@ function Calculator({resultList, setResultList}){
                 OBJ.points=300;
                 break;
 
+        }
+        }else{
+            switch(OBJ.event){
+                case "100 m":
+                    OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
+                    break;
+                case "200m":
+                    OBJ.points=200;
+                    break;
+                case"300m":
+                    OBJ.points=300;
+                    break;
+            }
         }
        
         console.log(OBJ);
@@ -79,7 +99,7 @@ function Calculator({resultList, setResultList}){
                 <div className="form-group py-3 col-6">
                     <label className="form-label" htmlFor="time">Enter Time</label>
                     <input type="text"  className="form-control" placeholder="mm:ss.ms"
-                        pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
+                        // pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
                         {...register("time")}/>
 
                 </div>
@@ -87,15 +107,15 @@ function Calculator({resultList, setResultList}){
                 <div className="form-group py-3 col-6">
                     <label className="form-label" htmlFor="time">Enter Points</label>
                     <input type="text"  className="form-control" placeholder=""
-                        pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
+                        // pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
                         {...register("points")}/>
 
                 </div>
                 </div>
 
                 <div className="row">
-                <button id = "create" type="submit" className="btn col mx-3">Calculate Points</button>
-                <button id = "create" type="submit" className="btn col mx-3">Calculate Time</button>
+                <button   type="submit" className="btn col mx-3">Calculate Points</button>
+                <button  type="submit" className="btn col mx-3">Calculate Time</button>
                 </div>
             </form>
 
