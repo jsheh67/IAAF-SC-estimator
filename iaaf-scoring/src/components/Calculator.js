@@ -34,8 +34,10 @@ function Calculator({resultList, setResultList}){
     }
 
     // onSubmit={handleSubmit(onSubmit)}
+    
 
     const onSubmitCalcPoints=(OBJ)=>{
+       
         OBJ.time = parseFloat(OBJ.time);
         console.log(OBJ.points)
 
@@ -57,6 +59,7 @@ function Calculator({resultList, setResultList}){
 
 
     const onSubmitCalcTime=(OBJ)=>{
+        
         switch(OBJ.event){
             case "100 m":
                 OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
@@ -77,7 +80,8 @@ function Calculator({resultList, setResultList}){
 
     
     return(
-        <div className="container-md">
+        <div className="row">
+        <div className="container-md col-5 m-5 p-3 pb-5  rounded shadow border">
             <form id="calculate-points-form">
                 <div className="form-group py-1">
                     <label className="form-label" htmlFor="selectEvent">Select Event</label>
@@ -114,7 +118,6 @@ function Calculator({resultList, setResultList}){
                 <div className="form-group py-3 col-6">
                     <label className="form-label" htmlFor="time">Enter Points</label>
                     <input type="number"  className="form-control" placeholder=""
-                        // pattern="\\d{0,1,2}:{0,1}\\d{1,2}\.{0,1}\\d{0,1,2}"
                         {...register("points")}/>
 
                 </div>
@@ -125,10 +128,13 @@ function Calculator({resultList, setResultList}){
                 <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn col mx-3">Calculate Time</button>
                 </div>
             </form>
+            </div>
 
+            <div className="col-5 ">
             <ResultTable 
                 resultList={resultList}
                 setResultList={setResultList}/>
+            </div>
 
 
         </div>

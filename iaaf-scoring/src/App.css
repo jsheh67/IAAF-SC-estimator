@@ -1,3 +1,19 @@
 .btn{
     background-color: lightblue;
 }
+
+#clearButton{
+    background-color: white;
+}
+#clearButton:hover{
+    background-color: white;
+    color: rgb(121, 1, 1);
+}
+
+#remove{
+    background-color: white;
+    border: solid #DEE2E6 1px;
+}
+#remove:hover{
+    background-color: #DEE2E6;
+}
