@@ -18,6 +18,19 @@ function Calculator({resultList, setResultList}){
     } 
 
     const onSubmit=(OBJ)=>{
+        switch(OBJ.event){
+            case "100 m":
+                OBJ.points=50;
+                break;
+            case "200m":
+                OBJ.points=200;
+                break;
+            case"300m":
+                OBJ.points=300;
+                break;
+
+        }
+       
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
@@ -39,6 +52,13 @@ function Calculator({resultList, setResultList}){
                 </div>
 
                 <div className="form-group py-3">
+                    <input {...register("gender", { required: true })} type="radio" value="Men's" /> 
+                    Men
+                    <input {...register("gender", { required: true })} type="radio" value="Women's" />
+                    Women
+                </div>
+
+                <div className="form-group py-3">
                     <label className="form-label" htmlFor="time">Enter Time</label>
                     <input type="text"  className="form-control" placeholder="mm:ss.ms"
                     {...register("time",{required: "enter time"})}/>
@@ -49,7 +69,9 @@ function Calculator({resultList, setResultList}){
 
             </form>
 
-            <ResultTable resultList={resultList}/>
+            <ResultTable 
+                resultList={resultList}
+                setResultList={setResultList}/>
 
 
         </div>
