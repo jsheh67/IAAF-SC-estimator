@@ -26,10 +26,10 @@ function ResultTable({resultList, setResultList}){
     return(
         <div className= "mt-5 p-3 pb-5 rounded shadow border">
         <div className="row">
-            <h6 className="col-6">Results</h6>
-            <button id="clearButton"className="btn btn-sm col-5" onClick={clear}>Clear results?</button>
+            <h4 className="col">Results</h4>
+            <button id="clearButton"className="btn btn-sm col" onClick={clear}>Clear results?</button>
         </div>
-        <table className="table">
+        <table className="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Event</th>

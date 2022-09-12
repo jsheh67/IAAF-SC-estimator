@@ -1,6 +1,5 @@
 import Header from './components/Header';
 import './App.css';
-
 import { useState } from 'react';
 import Calculator from './components/Calculator';
 
@@ -12,7 +11,6 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
         <Header />
 
         <Calculator 
@@ -25,10 +23,7 @@ function App() {
         <GetPoints />
         <ResultTable /> */}
 
-       
-       
-       
-      </header>
+    
     </div>
   );
 }

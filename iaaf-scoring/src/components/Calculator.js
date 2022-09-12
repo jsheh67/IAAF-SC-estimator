@@ -80,8 +80,9 @@ function Calculator({resultList, setResultList}){
 
     
     return(
-        <div className="row">
-        <div className="container-md col-5 m-5 p-3 pb-5  rounded shadow border">
+        <div className="d-flex  justify-content-start">
+        <div className="container col-5 me-4 mt-5 ms-5 p-3 pb-5 rounded shadow border ">
+            <h4> Calculator </h4>
             <form id="calculate-points-form">
                 <div className="form-group py-1">
                     <label className="form-label" htmlFor="selectEvent">Select Event</label>
@@ -122,15 +123,19 @@ function Calculator({resultList, setResultList}){
 
                 </div>
                 </div>
+                <hr></hr>
+
 
                 <div className="row">
-                <button  onClick={handleSubmit(onSubmitCalcPoints)} type="submit" className="btn col mx-3">Calculate Points</button>
-                <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn col mx-3">Calculate Time</button>
+                    <h5>Calculate</h5>
+                    
+                    <button  onClick={handleSubmit(onSubmitCalcPoints)} type="submit" className="btn get col mx-3 mb-2"> Points</button>
+                    <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn  get col mx-3 mb-2"> Time</button>
                 </div>
             </form>
             </div>
 
-            <div className="col-5 ">
+            <div className="col-5 me-5 ">
             <ResultTable 
                 resultList={resultList}
                 setResultList={setResultList}/>

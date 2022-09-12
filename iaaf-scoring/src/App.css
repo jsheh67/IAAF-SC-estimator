@@ -1,13 +1,25 @@
-.btn{
-    background-color: lightblue;
+.get{
+    background-color: rgb(243, 243, 243);
+    border: solid #DEE2E6 1px;
+}
+
+.get:hover{
+    color: rgb(121, 1, 1) !important;
+    background-color: #c5c5c5 !important;
+    border: solid black 1px;
+
 }
 
 #clearButton{
     background-color: white;
+    color: rgb(159, 159, 159);
 }
+
+
 #clearButton:hover{
     background-color: white;
     color: rgb(121, 1, 1);
+    
 }
 
 #remove{
@@ -17,3 +29,7 @@
 #remove:hover{
     background-color: #DEE2E6;
 }
+
+/* .title{
+    background-image: url(./Images/track.png) ;
+} */
