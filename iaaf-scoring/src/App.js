@@ -1,26 +1,29 @@
 import Header from './components/Header';
 import './App.css';
-import SelectEvent from './components/SelectEvent';
-import InputTime from './components/InputTime';
-import GetPoints from './components/GetPoints';
-import ResultTable from './components/ResultTable';
 
 import { useState } from 'react';
+import Calculator from './components/Calculator';
 
 function App() {
 
-  const[currentEvent, setCurrentEvent]= useState({});
-  const[currentTime, setCurrentTime]= useState({});
+  // const[currentEvent, setCurrentEvent]= useState({});
+  // const[currentTime, setCurrentTime]= useState({});
   const[resultList, setResultList]=useState([]);
 
   return (
     <div className="App">
       <header className="App-header">
         <Header />
-        <SelectEvent />
+
+        <Calculator 
+          resultList={resultList}
+          setResultList={setResultList}/>
+
+
+        {/* <SelectEvent />
         <InputTime />
         <GetPoints />
-        <ResultTable />
+        <ResultTable /> */}
 
        
        

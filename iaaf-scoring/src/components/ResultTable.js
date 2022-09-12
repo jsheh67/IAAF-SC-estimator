@@ -1,6 +1,17 @@
-function ResultTable(){
+function ResultTable({resultList}){
 
     const resultFactory=()=>{
+        return(resultList.map(r=>{
+            return(
+                <tr>
+                    <td></td>
+                    <td>{r.event}</td>
+                    <td>{r.time}</td>
+                    <td>points</td>
+                    
+                </tr>
+            )
+        }))
         
     }
 
@@ -15,12 +26,7 @@ function ResultTable(){
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td>800m</td>
-                    <td>1:54.5</td>
-                    <td>900</td>
-                </tr>
+                {resultFactory()}
             </tbody>
 
         </table>
