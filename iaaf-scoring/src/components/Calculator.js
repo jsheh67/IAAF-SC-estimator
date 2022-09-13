@@ -18,6 +18,8 @@ function Calculator({resultList, setResultList}){
     const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
     const sixStats={"min":128.919, "A":0.43976, "c":1.972}
     const eightStats={"min":181.04, "A":0.2341, "c":1.967}
+    const kStats={"min":234.82, "A":0.1677, "c":1.92446} // could use some work sumsq kinda high here
+    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624} 
 
 
     const eventSelectionFactory=()=>{
