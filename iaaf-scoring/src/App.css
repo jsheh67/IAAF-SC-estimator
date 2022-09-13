@@ -10,6 +10,15 @@
 
 }
 
+.resultRow{
+    animation-name: pop-in;
+    animation-duration: 0.5s;
+}
+@keyframes pop-in {
+    0% {scale: 1.1;}
+    100%{scale:1}   
+}
+
 #clearButton{
     background-color: white;
     color: rgb(159, 159, 159);
@@ -29,6 +38,10 @@
 #remove:hover{
     background-color: #DEE2E6;
 }
+
+
+
+
 
 /* .title{
     background-image: url(./Images/track.png) ;

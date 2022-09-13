@@ -9,8 +9,7 @@ function Result({r, resultList, setResultList}){
 
 
     return(
-        <tr>
-                    
+        <tr className="resultRow">        
             <td>{r.gender} {r.event}</td>
             <td>{r.time}</td>
             <td>{r.points}</td>
@@ -18,8 +17,7 @@ function Result({r, resultList, setResultList}){
                 <button id="remove"className="btn" onClick={remove}>
                     <span class="bi-trash"></span>
                 </button>
-            </td>
-                    
+            </td>         
         </tr>
     )
 }

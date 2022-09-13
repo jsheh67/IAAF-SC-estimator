@@ -19,7 +19,8 @@ function Calculator({resultList, setResultList}){
     const sixStats={"min":128.919, "A":0.43976, "c":1.972}
     const eightStats={"min":181.04, "A":0.2341, "c":1.967}
     const kStats={"min":234.82, "A":0.1677, "c":1.92446} // could use some work sumsq kinda high here
-    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624} 
+    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
+    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455}  
 
 
     const eventSelectionFactory=()=>{
@@ -34,7 +35,7 @@ function Calculator({resultList, setResultList}){
         console.log(c);
         console.log(time);
 
-        return Math.trunc(a*(Math.pow((Math.abs(time-min)),c)));
+        return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
         // return (a*(Math.pow((time-min),c)));
     }
 
@@ -72,6 +73,16 @@ function Calculator({resultList, setResultList}){
             case"800m":
                 OBJ.points=calcPoints(eightStats.min, eightStats.A, eightStats.c, OBJ.time);
                 break;
+            case"1000m":
+                OBJ.points=calcPoints(kStats.min, kStats.A, kStats.c, OBJ.time);
+                break;
+            case"1500m":
+                OBJ.points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.time);
+                break;
+            case"1 mile":
+                OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time);
+                break;
+
 
 
 
@@ -130,19 +141,40 @@ function Calculator({resultList, setResultList}){
                     <label className=""htmlFor="women">Women</label>
                     
                 </div>
+                <hr></hr>
 
                 <div className="row">
-                <div className="form-group py-3 col-6">
-                    <label className="form-label" htmlFor="time">Enter Time</label>
-                    <input type="text"  className="form-control" placeholder="mm:ss.ms"
-                        pattern="([01]\d|2[0-3])(:[0-5]\d){2}:\d{1,3}"
-                        {...register("time")}/>
-
+                    <label className="form-label col-7" htmlFor="seconds">Enter Time</label>
+                    <label className="form-label col-5" htmlFor="points">Enter Points</label>
                 </div>
 
-                <div className="form-group py-3 col-6">
-                    <label className="form-label" htmlFor="time">Enter Points</label>
-                    <input type="number"  className="form-control" placeholder=""
+                <div className="row ">
+                    
+
+               
+                    {/* <label className="form-label py-3 " htmlFor="time">Enter Time</label>     */}
+                    <div id="minutes" className="form-group me-0 px-0 ps-3 pb-3 col-2">
+                        <input type="number" id="time" className="form-control" placeholder="mm"
+                            {...register("minutes")}/>
+                    </div>
+                    
+                    <div id="seconds"className="form-group mx-0 px-0 pb-3 col-2">
+                        <input type="number"  className="form-control " placeholder="ss"
+                            {...register("seconds")}/>
+                    </div>
+                    
+                    <div id="ms"className="form-group mx-0 px-0 pb-3 col-2">
+                        <input type="number" className="form-control " placeholder="ms"
+                            {...register("milisceonds")}/>
+                    </div>
+              
+                    
+
+                
+
+                <div className="form-group pb-3 col-5 offset-1">
+                    {/* <label className="form-label" htmlFor="points">Enter Points</label> */}
+                    <input type="number" id="points" className="form-control" placeholder=""
                         {...register("points")}/>
 
                 </div>
