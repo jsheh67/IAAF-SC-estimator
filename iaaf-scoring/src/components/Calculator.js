@@ -8,7 +8,7 @@ function Calculator({resultList, setResultList}){
         mode: "onChange"
       });
 
-    const events=["100 m","200m","300m","400m","600m","800m","1000m", "1500m",
+    const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m",
                 "1 mile", "2000m", "3000m" ];
     
     const hundredStats={"min":16.79, "A":30.417, "c":1.92}
@@ -16,7 +16,9 @@ function Calculator({resultList, setResultList}){
     const threeStats={"min":57.169, "A":1.85, "c":1.9971}
     const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
     const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
-    
+    const sixStats={"min":128.919, "A":0.43976, "c":1.972}
+    const eightStats={"min":181.04, "A":0.2341, "c":1.967}
+
 
     const eventSelectionFactory=()=>{
         return(events.map(e=>{
@@ -54,8 +56,23 @@ function Calculator({resultList, setResultList}){
                 OBJ.points=calcPoints(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.time);
                 break;
             case"300m":
-                OBJ.points=300;
+                OBJ.points=calcPoints(threeStats.min, threeStats.A, threeStats.c, OBJ.time);
                 break;
+            case"400m":
+                OBJ.points=calcPoints(fourStats.min, fourStats.A, fourStats.c, OBJ.time);
+                break;
+            case"500m":
+                OBJ.points=calcPoints(fiveStats.min, fiveStats.A, fiveStats.c, OBJ.time);
+                break;
+            case"600m":
+                OBJ.points=calcPoints(sixStats.min, sixStats.A, sixStats.c, OBJ.time);
+                break;
+            case"800m":
+                OBJ.points=calcPoints(eightStats.min, eightStats.A, eightStats.c, OBJ.time);
+                break;
+
+
+
         }
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
