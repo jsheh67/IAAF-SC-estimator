@@ -13,12 +13,17 @@ function Calculator({resultList, setResultList}){
     
     const hundredStats={"min":16.79, "A":30.417, "c":1.92}
     const twoHundredStats={"min":35.05, "A":6.606, "c":1.925}
+    const threeStats={"min":57.169, "A":1.85, "c":1.9971}
+    const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
+    const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
+    
 
     const eventSelectionFactory=()=>{
         return(events.map(e=>{
             return(<option key={e+"key"} value={e}>{e}</option >)
         }))
     } 
+
     const calcPoints=(min, a, c, time)=>{
         console.log(min);
         console.log(a);
