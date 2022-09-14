@@ -134,18 +134,36 @@ function Calculator({resultList, setResultList}){
                 OBJ.time=calcTime(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.points);
                 break;
             case"300m":
-                OBJ.points=300;
+                OBJ.time=calcTime(threeStats.min, threeStats.A, threeStats.c,OBJ.points );
+                break;
+            case"400m":
+                OBJ.time=calcTime(fourStats.min, fourStats.A, fourStats.c, OBJ.points);
+                break;
+            case"500m":
+                OBJ.time=calcTime(fiveStats.min, fiveStats.A, fiveStats.c, OBJ.points);
+                break;
+            case"600m":
+                OBJ.time=calcTime(sixStats.min, sixStats.A, sixStats.c, OBJ.points);
+                break;
+            case"800m":
+                OBJ.time=calcTime(eightStats.min, eightStats.A, eightStats.c, OBJ.points);
+                break;
+            case"1000m":
+                OBJ.time=calcTime(kStats.min, kStats.A, kStats.c, OBJ.points);
+                break;
+            case"1500m":
+                OBJ.time=calcTime(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.points);
+                break;
+            case"1 mile":
+                OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
                 break;
         }
         let timeSeconds = parseFloat(OBJ.time);
         let secs= (timeSeconds%60);
-        OBJ.miliseconds= (secs%1).toFixed(2)*100;
+        OBJ.miliseconds= Math.ceil((secs%1).toFixed(2)*100);
         OBJ.seconds=Math.floor(secs);
         OBJ.minutes= Math.floor(timeSeconds/60);
         console.log(OBJ);
-
-
-
         setResultList([OBJ,...resultList]);
         console.log(resultList);
     }
