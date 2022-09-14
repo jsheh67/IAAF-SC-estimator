@@ -110,9 +110,21 @@ function Calculator({resultList, setResultList}){
         setResultList([OBJ,...resultList]);
         console.log(resultList);
     }
+    
+
+   
+    // formatTime(131.5);
 
 
     const onSubmitCalcTime=(OBJ)=>{
+
+
+
+
+        console.log(OBJ);
+        // OBJ.minutes=
+        // OBJ.seconds=
+        // OBJ.milisecond=
         
         switch(OBJ.event){
             case "100 m":
@@ -125,7 +137,15 @@ function Calculator({resultList, setResultList}){
                 OBJ.points=300;
                 break;
         }
+        let timeSeconds = parseFloat(OBJ.time);
+        let secs= (timeSeconds%60);
+        OBJ.miliseconds= (secs%1).toFixed(2)*100;
+        OBJ.seconds=Math.floor(secs);
+        OBJ.minutes= Math.floor(timeSeconds/60);
         console.log(OBJ);
+
+
+
         setResultList([OBJ,...resultList]);
         console.log(resultList);
     }
@@ -185,34 +205,7 @@ function Calculator({resultList, setResultList}){
                         {...register("miliseconds")}/>
                 </div>
                 </div>
-               
-                    {/* <label className="form-label py-3 " htmlFor="time">Enter Time</label>     */}
-                    
-                    
-                    {/* <div id="minutes" className="form-group me-0 px-0 ps-3 pb-3 col">
-                        <input type="number" id="time" className="form-control" placeholder="mm"
-                            {...register("minutes")}/>
-                    </div>
-                    
-                    
-                    <div id="seconds"className="form-group mx-0 px-0 pb-3 col">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">@</div>
-                        </div>
-                        <input type="number"  className="form-control " placeholder="ss"
-                            {...register("seconds")}/>
-                    </div>
-                   
-                    
-                    <div id="ms"className="form-group mx-0 px-0 pb-3 col">
-                        <input type="number" className="form-control " placeholder="ms"
-                            {...register("miliseconds")}/>
-                    </div> */}
-              
-                    
-
-                
-
+            
                 <div className="form-group pb-3 col-5 offset-1">
                     {/* <label className="form-label" htmlFor="points">Enter Points</label> */}
                     <input type="number" id="points" className="form-control" placeholder=""
