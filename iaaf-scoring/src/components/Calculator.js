@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import ResultTable from "./ResultTable";
-
+import { useState } from 'react';
 
 function Calculator({resultList, setResultList}){
+
+    const[resultId, setResultId]= useState(0);
 
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
@@ -43,13 +45,30 @@ function Calculator({resultList, setResultList}){
         return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
     }
 
-    // onSubmit={handleSubmit(onSubmit)}
+    const convertToSeconds=(min, sec, mili)=>{
+        const length= (mili + '').replace('.', '').length;
+        sec=parseInt(sec);
+        min=parseInt(min);
+        mili=parseInt(mili);
+
+        if(isNaN(mili)){
+            mili=0;
+        }
+        if(isNaN(sec)){
+            sec=0;
+        }
+        if(isNaN(min)){
+            min=0;
+        }
+
+        return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
+    }
     
 
     const onSubmitCalcPoints=(OBJ)=>{
-       
-        OBJ.time = parseFloat(OBJ.time);
-        console.log(OBJ.points)
+        console.log(OBJ);
+
+        OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
 
         switch(OBJ.event){
             case "100 m":
@@ -150,23 +169,45 @@ function Calculator({resultList, setResultList}){
 
                 <div className="row ">
                     
-
+                <div className="form-group col-6">  
+                <div class="input-group ">
+                    <input type="number" aria-label="minutes" class="form-control"
+                        placeholder="mm"
+                         {...register("minutes")}/>
+                    <span class="input-group-text">:</span>
+                    <input type="number" aria-label="seconds" class="form-control"
+                        placeholder="ss"
+                        {...register("seconds")}/>
+                        
+                    <span class="input-group-text">.</span>
+                    <input type="number" aria-label="miliseconds" class="form-control"
+                        placeholder="ms"
+                        {...register("miliseconds")}/>
+                </div>
+                </div>
                
                     {/* <label className="form-label py-3 " htmlFor="time">Enter Time</label>     */}
-                    <div id="minutes" className="form-group me-0 px-0 ps-3 pb-3 col-2">
+                    
+                    
+                    {/* <div id="minutes" className="form-group me-0 px-0 ps-3 pb-3 col">
                         <input type="number" id="time" className="form-control" placeholder="mm"
                             {...register("minutes")}/>
                     </div>
                     
-                    <div id="seconds"className="form-group mx-0 px-0 pb-3 col-2">
+                    
+                    <div id="seconds"className="form-group mx-0 px-0 pb-3 col">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
                         <input type="number"  className="form-control " placeholder="ss"
                             {...register("seconds")}/>
                     </div>
+                   
                     
-                    <div id="ms"className="form-group mx-0 px-0 pb-3 col-2">
+                    <div id="ms"className="form-group mx-0 px-0 pb-3 col">
                         <input type="number" className="form-control " placeholder="ms"
-                            {...register("milisceonds")}/>
-                    </div>
+                            {...register("miliseconds")}/>
+                    </div> */}
               
                     
 

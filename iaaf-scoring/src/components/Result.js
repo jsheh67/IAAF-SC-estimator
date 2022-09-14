@@ -11,7 +11,7 @@ function Result({r, resultList, setResultList}){
     return(
         <tr className="resultRow">        
             <td>{r.gender} {r.event}</td>
-            <td>{r.time}</td>
+            <td>{r.minutes==0 ? "":r.minutes+":" }{r.seconds}.{r.miliseconds}</td>
             <td>{r.points}</td>
             <td>
                 <button id="remove"className="btn" onClick={remove}>
