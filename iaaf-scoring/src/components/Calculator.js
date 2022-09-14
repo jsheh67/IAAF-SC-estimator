@@ -19,7 +19,7 @@ function Calculator({resultList, setResultList}){
       });
 
     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
-                "1600m","1 mile", "2000m", "3000m" ];
+                "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
     
     const hundredStats={"min":16.79, "A":30.417, "c":1.92}
     const twoHundredStats={"min":35.05, "A":6.606, "c":1.925}
@@ -33,6 +33,8 @@ function Calculator({resultList, setResultList}){
     const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
     const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
     const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
+    const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
+    const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
 
 
     const eventSelectionFactory=()=>{
@@ -70,7 +72,6 @@ function Calculator({resultList, setResultList}){
         if(isNaN(min)){
             min=0;
         }
-
         return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
     }
     
@@ -114,11 +115,28 @@ function Calculator({resultList, setResultList}){
             case"1500m":
                 OBJ.points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.time);
                 break;
+            case "1600m":
+                OBJ.time = OBJ.time*1.006;
+                OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time)
             case"1 mile":
                 OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time);
                 break;
-
-
+            case"3000m":
+                OBJ.points=calcPoints(threeKStats.min, threeKStats.A, threeKStats.c, OBJ.time);
+                break;
+            case"3200m":
+                OBJ.time = OBJ.time*1.006;
+                OBJ.points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.time);
+                break;
+            case"2 mile":
+                OBJ.points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.time);
+                break;
+            case"5000m":
+                OBJ.points=calcPoints(fiveKStats.min, fiveKStats.A, fiveKStats.c, OBJ.time);
+                break;
+            case"10000m":
+                OBJ.points=calcPoints(tenKStats.min, tenKStats.A, tenKStats.c, OBJ.time);
+                break;
 
 
         }
@@ -176,6 +194,8 @@ function Calculator({resultList, setResultList}){
                 OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
                 break;
         }
+
+
         let timeSeconds = parseFloat(OBJ.time);
         let secs= (timeSeconds%60);
         OBJ.miliseconds= Math.ceil((secs%1).toFixed(2)*100);
