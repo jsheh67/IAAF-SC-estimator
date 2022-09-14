@@ -18,8 +18,8 @@ function Calculator({resultList, setResultList}){
         mode: "onChange"
       });
 
-    const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m",
-                "1 mile", "2000m", "3000m" ];
+    const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
+                "1600m","1 mile", "2000m", "3000m" ];
     
     const hundredStats={"min":16.79, "A":30.417, "c":1.92}
     const twoHundredStats={"min":35.05, "A":6.606, "c":1.925}
@@ -30,7 +30,9 @@ function Calculator({resultList, setResultList}){
     const eightStats={"min":181.04, "A":0.2341, "c":1.967}
     const kStats={"min":234.82, "A":0.1677, "c":1.92446} // could use some work sumsq kinda high here
     const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
-    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455}  
+    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
+    const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
+    const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
 
 
     const eventSelectionFactory=()=>{
@@ -225,16 +227,16 @@ function Calculator({resultList, setResultList}){
                     
                 <div className="form-group col-6">  
                 <div class="input-group ">
-                    <input type="number" aria-label="minutes" class="form-control"
+                    <input type="number" aria-label="minutes" className="form-control"
                         placeholder="mm"
                          {...register("minutes")}/>
                     <span class="input-group-text">:</span>
-                    <input type="number" aria-label="seconds" class="form-control"
+                    <input type="number" aria-label="seconds" className="form-control"
                         placeholder="ss"
                         {...register("seconds")}/>
                         
                     <span class="input-group-text">.</span>
-                    <input type="number" aria-label="miliseconds" class="form-control"
+                    <input type="number" aria-label="miliseconds" className="form-control"
                         placeholder="ms"
                         {...register("miliseconds")}/>
                 </div>
