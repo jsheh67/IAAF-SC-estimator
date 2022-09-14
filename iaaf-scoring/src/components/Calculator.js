@@ -4,7 +4,15 @@ import { useState } from 'react';
 
 function Calculator({resultList, setResultList}){
 
-    const[resultId, setResultId]= useState(0);
+    const[resultId, setResultId]= useState(1);
+    console.log(resultId);
+
+   
+    const idIncrement = ()=>{
+        setResultId(resultId=>resultId+1);
+    };
+
+    
 
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
@@ -66,6 +74,12 @@ function Calculator({resultList, setResultList}){
     
 
     const onSubmitCalcPoints=(OBJ)=>{
+
+        console.log("hey")
+        
+       OBJ.id=resultId;
+        
+        idIncrement();
         console.log(OBJ);
 
         OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
@@ -118,7 +132,9 @@ function Calculator({resultList, setResultList}){
 
     const onSubmitCalcTime=(OBJ)=>{
 
-
+        
+        OBJ.id=resultId;
+        idIncrement();
 
 
         console.log(OBJ);
@@ -246,7 +262,8 @@ function Calculator({resultList, setResultList}){
             <div className="col-5 me-5 ">
             <ResultTable 
                 resultList={resultList}
-                setResultList={setResultList}/>
+                setResultList={setResultList}
+                setResultId={setResultId}/>
             </div>
 
 

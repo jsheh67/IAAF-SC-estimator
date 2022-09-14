@@ -1,16 +1,16 @@
 import Result from "./Result"
 import "../App.css"
 
-function ResultTable({resultList, setResultList}){
+function ResultTable({resultList, setResultList, setResultId}){
 
     const resultFactory=()=>{
        
 
         return(resultList.map(r=>{
-            let idIterator=0;
+            
             return(
                 <Result 
-                    key={r.id=idIterator++}
+                    key={r.id}
                     r={r}
                     resultList={resultList}
                     setResultList={setResultList}/>
@@ -21,6 +21,7 @@ function ResultTable({resultList, setResultList}){
 
     const clear=()=>{
         setResultList([]);
+        setResultId(0);
     }
 
     return(
