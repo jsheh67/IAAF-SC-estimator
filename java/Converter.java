@@ -27,7 +27,20 @@ public class Converter {
                 if(line.startsWith("MEN")||line.startsWith("WOMEN")||line.length()<4){
                     continue;
                 }
-                writer.println(line.replaceAll("\\s",","));
+                
+                //pdf was formatted so points switched sides every page
+                //reformatted here for consistency
+                if(line.endsWith("Points")){
+                    line="Points ".concat(line.substring(0,line.length()-7));
+                }
+                line=line.replaceAll("\\s",",");
+                String[] splitLine= line.split(",");
+
+                if(splitLine[splitLine.length-1].matches("\\d{1,4}")){
+                    line=splitLine[splitLine.length-1].concat(",").concat(line.substring(0,line.length()-(splitLine[splitLine.length-1]).length()));
+                }
+                writer.println(line);
+
             }
             writer.close();
 
