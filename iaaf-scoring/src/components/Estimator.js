@@ -16,6 +16,10 @@ function Estimator(){
         }))
     } 
 
+    const onSubmitEstimate=(Obj)=>{
+
+    }
+
     return(
         <div className="d-flex">
             <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border">
@@ -92,7 +96,8 @@ function Estimator(){
                     </div>
 
                     </div>
-                    <hr></hr>
+
+                    <hr className="mt-4"></hr>
 
                     <div className="form-group py-1 pb-3">
                         <label className="form-label " htmlFor="selectEvent1">Event to Estimate</label>
@@ -103,8 +108,13 @@ function Estimator(){
 
                         </select>
                         {/* <p className="form-error-message">{errors.types?.message}</p> */}
-
                     </div>
+
+                    <div className="row">
+                        <button onClick={handleSubmit(onSubmitEstimate)} type="submit" className="btn get col mx-3 mb-2" >Estimate Time</button>
+                    </div>
+
+
 
 
 

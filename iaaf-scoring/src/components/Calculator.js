@@ -45,8 +45,12 @@ function Calculator({resultList, setResultList}){
     } 
 
     const calcPoints=(min, a, c, time)=>{
-        return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
-        // return (a*(Math.pow((time-min),c)));
+
+        if(time>min){
+            return 0;
+        }else{
+            return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
+        }
     }
 
     const calcTime=(min, a, c,points)=>{
