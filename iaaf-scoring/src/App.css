@@ -16,6 +16,10 @@ i{
     font-weight: bold;
 }
 
+.col.transition{
+    background: linear-gradient,(#212529,#0E6EFD);
+}
+
 .form-control{
     padding-right: 5px;
     padding-left: 5px;
