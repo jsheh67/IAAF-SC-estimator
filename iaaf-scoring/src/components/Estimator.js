@@ -5,9 +5,24 @@ function Estimator(){
 
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
-      });
+    });
 
-    const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
+    const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
+    const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
+    const threeStats={"min":57.169, "A":1.85, "c":1.9971}
+    const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
+    const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
+    const sixStats={"min":128.919, "A":0.43976, "c":1.972}
+    const eightStats={"min":181.04, "A":0.2341, "c":1.967}
+    const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
+    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
+    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
+    const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
+    const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
+    const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
+    const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
+
+    const events=["100m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
                 "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
     
     const eventSelectionFactory=()=>{
@@ -16,7 +31,128 @@ function Estimator(){
         }))
     } 
 
-    const onSubmitEstimate=(Obj)=>{
+    const calcPoints=(min, a, c, time)=>{
+        if(time>min){
+            return 0;
+        }else{
+            return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
+        }
+    }
+
+    const calcTime=(min, a, c,points)=>{
+        return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
+    }
+
+    const convertToSeconds=(min, sec, mili)=>{
+        const length= (mili + '').replace('.', '').length;
+        sec=parseInt(sec);
+        min=parseInt(min);
+        mili=parseInt(mili);
+        if(isNaN(mili)){
+            mili=0;
+        }
+        if(isNaN(sec)){
+            sec=0;
+        }
+        if(isNaN(min)){
+            min=0;
+        }
+        return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
+    }
+
+    const getPoints=(event, time)=>{
+        let points;
+        switch(event){
+            case "100m":
+                points=calcPoints(hundredStats.min, hundredStats.A, hundredStats.c, time);
+                break;
+            case "200m":
+                points=calcPoints(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, time);
+                break;
+            case"300m":
+                points=calcPoints(threeStats.min, threeStats.A, threeStats.c,time);
+                break;
+            case"400m":
+                points=calcPoints(fourStats.min, fourStats.A, fourStats.c, time);
+                break;
+            case"500m":
+                points=calcPoints(fiveStats.min, fiveStats.A, fiveStats.c,time);
+                break;
+            case"600m":
+                points=calcPoints(sixStats.min, sixStats.A, sixStats.c, time);
+                break;
+            case"800m":
+                points=calcPoints(eightStats.min, eightStats.A, eightStats.c, time);
+                break;
+            case"1000m":
+                points=calcPoints(kStats.min, kStats.A, kStats.c, time);
+                break;
+            case"1500m":
+                points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, time);
+                break;
+            case"1600m":
+                time = time*1.005;
+                points=calcPoints(mileStats.min, mileStats.A, mileStats.c, time)
+            case"1 mile":
+                points=calcPoints(mileStats.min, mileStats.A, mileStats.c, time);
+                break;
+            case"3000m":
+                points=calcPoints(threeKStats.min, threeKStats.A, threeKStats.c, time);
+                break;
+            case"3200m":
+                time = time*1.005;
+                points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, time);
+                break;
+            case"2 mile":
+                points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, time);
+                break;
+            case"5000m":
+                points=calcPoints(fiveKStats.min, fiveKStats.A, fiveKStats.c,time);
+                break;
+            case"10000m":
+                points=calcPoints(tenKStats.min, tenKStats.A, tenKStats.c, time);
+                break;
+
+        }
+        return points;
+    }
+
+    const getDistance=(distance)=>{
+        let result=0;
+        if(distance=="1 mile"){
+            result= 1609;
+        }else if(distance=="2 mile"){
+            result= 3218;
+        }else{
+            result=distance.substring(0,distance.length -1);
+        }
+        console.log(result)
+        return result;
+    }
+
+
+
+
+    const onSubmitEstimate=(OBJ)=>{
+        OBJ.time1= convertToSeconds(OBJ.minutes1, OBJ.seconds1, OBJ.miliseconds1);
+        OBJ.time2= convertToSeconds(OBJ.minutes2, OBJ.seconds2, OBJ.miliseconds2);
+
+        let distance1=getDistance(OBJ.event1);
+        let distance2=getDistance(OBJ.event2);
+        let distanceEstimate=getDistance(OBJ.eventEstimate);
+
+        let event1Points=getPoints(OBJ.event1, OBJ.time1);
+        console.log(event1Points);
+
+        let event2Points=getPoints(OBJ.event2, OBJ.time2);
+        console.log(event2Points);
+
+        let slope =((event1Points-event2Points)/(distance1-distance2))
+
+        let estimatedPoints = Math.ceil(slope*(distanceEstimate-distance1)+event1Points);
+        
+        console.log("Estimation");
+        console.log(estimatedPoints);
 
     }
 

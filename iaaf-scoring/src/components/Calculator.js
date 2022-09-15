@@ -45,7 +45,6 @@ function Calculator({resultList, setResultList}){
     } 
 
     const calcPoints=(min, a, c, time)=>{
-
         if(time>min){
             return 0;
         }else{
