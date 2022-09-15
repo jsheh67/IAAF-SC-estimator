@@ -1,7 +1,10 @@
 import Header from './components/Header';
+import Calculator from './components/Calculator';
+import Footer from "./components/Footer";
+
 import './App.css';
 import { useState } from 'react';
-import Calculator from './components/Calculator';
+
 
 
 function App() {
@@ -17,6 +20,8 @@ function App() {
         <Calculator 
           resultList={resultList}
           setResultList={setResultList}/>
+
+        <Footer />
 
 
         {/* <SelectEvent />

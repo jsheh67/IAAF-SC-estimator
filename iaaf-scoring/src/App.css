@@ -4,6 +4,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+i{
+    color: black;
+    scale: 2;
+}
+/* footer{
+    position: sticky;
+} */
+
 .form-label{
     font-weight: bold;
 }

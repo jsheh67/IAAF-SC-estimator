@@ -44,11 +44,6 @@ function Calculator({resultList, setResultList}){
     } 
 
     const calcPoints=(min, a, c, time)=>{
-        console.log(min);
-        console.log(a);
-        console.log(c);
-        console.log(time);
-
         return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
         // return (a*(Math.pow((time-min),c)));
     }
@@ -77,13 +72,9 @@ function Calculator({resultList, setResultList}){
     
 
     const onSubmitCalcPoints=(OBJ)=>{
-
-        console.log("hey")
         
-       OBJ.id=resultId;
-        
+        OBJ.id=resultId;
         idIncrement();
-        console.log(OBJ);
 
         OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
 
@@ -152,16 +143,9 @@ function Calculator({resultList, setResultList}){
 
     const onSubmitCalcTime=(OBJ)=>{
 
-        
         OBJ.id=resultId;
         idIncrement();
 
-
-        console.log(OBJ);
-        // OBJ.minutes=
-        // OBJ.seconds=
-        // OBJ.milisecond=
-        
         switch(OBJ.event){
             case "100 m":
                 OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
