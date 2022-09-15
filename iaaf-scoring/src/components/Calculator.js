@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import ResultTable from "./ResultTable";
 import { useState } from 'react';
+
+import ResultTable from "./ResultTable";
 
 function Calculator({resultList, setResultList}){
 
