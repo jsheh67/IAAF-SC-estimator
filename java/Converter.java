@@ -33,7 +33,8 @@ public class Converter {
                 if(line.endsWith("Points")){
                     line="Points ".concat(line.substring(0,line.length()-7));
                 }
-                line=line.replaceAll("\\s",",");
+                line = line.replaceAll("2 Miles", "2mile");
+                line = line.replaceAll("\\s",",");
                 String[] splitLine= line.split(",");
 
                 if(splitLine[splitLine.length-1].matches("\\d{1,4}")){
