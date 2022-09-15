@@ -11,7 +11,7 @@ function App() {
   const[resultList, setResultList]=useState([]);
 
   return (
-    <div className="App">
+    <div className="App ">
         <Header />
 
         <Calculator 

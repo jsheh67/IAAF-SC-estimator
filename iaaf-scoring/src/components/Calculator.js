@@ -21,14 +21,14 @@ function Calculator({resultList, setResultList}){
     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
                 "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
     
-    const hundredStats={"min":16.79, "A":30.417, "c":1.92}
-    const twoHundredStats={"min":35.05, "A":6.606, "c":1.925}
+    const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
+    const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
     const threeStats={"min":57.169, "A":1.85, "c":1.9971}
     const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
     const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
     const sixStats={"min":128.919, "A":0.43976, "c":1.972}
     const eightStats={"min":181.04, "A":0.2341, "c":1.967}
-    const kStats={"min":234.82, "A":0.1677, "c":1.92446} // could use some work sumsq kinda high here
+    const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
     const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
     const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
     const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
@@ -116,7 +116,7 @@ function Calculator({resultList, setResultList}){
                 OBJ.points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.time);
                 break;
             case "1600m":
-                OBJ.time = OBJ.time*1.006;
+                OBJ.time = OBJ.time*1.005;
                 OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time)
             case"1 mile":
                 OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time);
@@ -125,7 +125,7 @@ function Calculator({resultList, setResultList}){
                 OBJ.points=calcPoints(threeKStats.min, threeKStats.A, threeKStats.c, OBJ.time);
                 break;
             case"3200m":
-                OBJ.time = OBJ.time*1.006;
+                OBJ.time = OBJ.time*1.005;
                 OBJ.points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.time);
                 break;
             case"2 mile":
@@ -193,10 +193,31 @@ function Calculator({resultList, setResultList}){
             case"1 mile":
                 OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
                 break;
+            case"1600m":
+                OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
+                OBJ.time = OBJ.time/1.005;
+                break;
+            case"3000m":
+                OBJ.time=calcTime(threeKStats.min, threeKStats.A, threeKStats.c, OBJ.points);
+                break;
+            case"3200m":
+                OBJ.time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.points);
+                OBJ.time = OBJ.time/1.005;
+                break;
+            case"2 mile":
+                OBJ.time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.points);
+                break;
+            case"5000m":
+                OBJ.time=calcTime(fiveKStats.min, fiveKStats.A, fiveKStats.c, OBJ.points);
+                break;
+            case"10000m":
+                OBJ.time=calcTime(tenKStats.min, tenKStats.A, tenKStats.c, OBJ.points);
+                break;
         }
 
 
         let timeSeconds = parseFloat(OBJ.time);
+        console.log(timeSeconds);
         let secs= (timeSeconds%60);
         OBJ.miliseconds= Math.ceil((secs%1).toFixed(2)*100);
         OBJ.seconds=Math.floor(secs);
@@ -208,14 +229,22 @@ function Calculator({resultList, setResultList}){
        
         
 
+
+
+
+
     
     return(
         <div className="d-flex  justify-content-start">
-        <div className="container col-5 me-4 mt-5 ms-5 p-3 pb-5 rounded shadow border ">
-            <h4> Calculator </h4>
+        <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border ">
+            <div className="card-header bg-dark">
+                <h4 className="pt-1 mb-0 text-light"> Calculator </h4>
+            </div>
+
+            <div className="card-body pt-1">
             <form id="calculate-points-form">
                 <div className="form-group py-1">
-                    <label className="form-label" htmlFor="selectEvent">Select Event</label>
+                    <label className="form-label mt-1 " htmlFor="selectEvent">Select Event</label>
                     <select className="form-control" id="selectEvent"
                     {...register("event",{required:""})}>
 
@@ -279,6 +308,8 @@ function Calculator({resultList, setResultList}){
                     <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn  get col mx-3 mb-2"> Time</button>
                 </div>
             </form>
+            </div>
+
             </div>
 
             <div className="col-5 me-5 ">
