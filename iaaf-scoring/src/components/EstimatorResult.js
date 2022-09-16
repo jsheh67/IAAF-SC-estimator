@@ -1,4 +1,11 @@
-function EstimatorResult({r}){
+function EstimatorResult({r, estResults, setEstResults}){
+
+
+    const remove= () =>{
+        console.log(r);
+        const filteredResults = estResults.filter(result => result.id !== r.id);
+        setEstResults(filteredResults);
+    }
 
     const timeFormater=(min, sec, mili)=>{
         let result="";
@@ -49,7 +56,7 @@ function EstimatorResult({r}){
             {timeFormater(r.EstimateMinutes, r.EstimateSeconds, r.EstimateMiliseconds)}
             </td>
             <td>
-                <button id="remove"className="btn" >
+                <button onClick={remove}id="remove"className="btn">
                     <span class="bi-trash"></span>
                 </button>
             </td>         

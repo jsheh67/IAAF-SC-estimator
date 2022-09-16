@@ -9,6 +9,12 @@ function Estimator({estResults, setEstResults}){
         mode: "onChange"
     });
 
+    const[resultId, setResultId]= useState(1);
+
+    const idIncrement = ()=>{
+        setResultId(resultId=>resultId+1);
+    };
+
     const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
     const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
     const threeStats={"min":57.169, "A":1.85, "c":1.9971}
@@ -193,8 +199,10 @@ function Estimator({estResults, setEstResults}){
 
 
     const onSubmitEstimate=(OBJ)=>{
-       
 
+        OBJ.id = resultId;
+        idIncrement();
+       
         OBJ.time1= convertToSeconds(OBJ.minutes1, OBJ.seconds1, OBJ.miliseconds1);
         OBJ.time2= convertToSeconds(OBJ.minutes2, OBJ.seconds2, OBJ.miliseconds2);
 

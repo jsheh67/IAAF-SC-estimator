@@ -13,8 +13,6 @@ function Calculator({resultList, setResultList}){
         setResultId(resultId=>resultId+1);
     };
 
-    
-
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
       });

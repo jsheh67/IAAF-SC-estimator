@@ -1,6 +1,6 @@
 import EstimatorResult from "./EstimatorResult"
 
-function EstimatorResultTable({estResults, setEstResults,}){
+function EstimatorResultTable({estResults, setEstResults,setResultId}){
 
     const resultFactory=()=>{
        
@@ -9,10 +9,10 @@ function EstimatorResultTable({estResults, setEstResults,}){
             
             return(
                 <EstimatorResult 
-                    // key={r.id}
+                    key={r.id}
                     r={r}
-                    // resultList={resultList}
-                    // setResultList={setResultList}
+                    estResults={estResults}
+                    setEstResults={setEstResults}
                     />
             )
            
@@ -21,7 +21,7 @@ function EstimatorResultTable({estResults, setEstResults,}){
 
     const clear=()=>{
         setEstResults([]);
-        // setResultId(0);
+        setResultId(0);
     }
 
     return(
