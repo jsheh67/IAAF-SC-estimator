@@ -217,6 +217,7 @@ function Estimator({estResults, setEstResults}){
         let event2Points=getPoints(OBJ.event2, OBJ.time2);
         console.log(event2Points);
 
+        //might re work this-- logistic function maybe?
         let slope =((event1Points-event2Points)/(distance1-distance2))
         let estimatedPoints = Math.ceil(slope*(distanceEstimate-distance1)+event1Points);
         

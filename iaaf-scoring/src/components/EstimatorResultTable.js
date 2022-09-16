@@ -42,7 +42,7 @@ function EstimatorResultTable({estResults, setEstResults,setResultId}){
                    
                     <th colspan="2" scope="col">Event 2</th>
 
-                    <th colspan="2" scope="col">Estimated</th>
+                    <th colspan="2" scope="col">Estimation</th>
                     
                     <th></th>       
                 </tr>
