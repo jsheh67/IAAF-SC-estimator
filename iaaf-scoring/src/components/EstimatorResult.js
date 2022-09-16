@@ -12,7 +12,7 @@ function EstimatorResult({r, estResults, setEstResults}){
         if (min!=0){
             result+=(min+":")
         }
-        if(sec.length==1 && min.length==0){
+        if((sec.length==1 || sec<10)&& min!=0){
             result+="0"+sec+"."
         }else if(sec.length==0){
             result+="00."
