@@ -1,5 +1,25 @@
 function EstimatorResult({r}){
 
+    const timeFormater=(min, sec, mili)=>{
+        let result="";
+        if (min!=0){
+            result+=(min+":")
+        }
+        if(sec.length==1 && min.length==0){
+            result+="0"+sec+"."
+        }else if(sec.length==0){
+            result+="00."
+        }else{
+            result+=sec+".";
+        }
+        if(mili.length==0){
+            result+="0"
+        }
+        result+=mili;
+
+        return result;
+    }
+
 
     return (
         <tr className="resultRow">        
@@ -8,9 +28,10 @@ function EstimatorResult({r}){
             </td>
 
             <td>
-                {r.minutes1==0 ? "" :(r.minutes1+":")}
+                {timeFormater(r.minutes1, r.seconds1, r.miliseconds1)}
+                {/* {r.minutes1==0 ? "" :(r.minutes1+":")}
                 {(r.seconds1<10 && r.minutes1!=0)?"0"+r.seconds1:r.seconds1}
-                {r.miliseconds1==0?".0":("."+r.miliseconds1)}
+                {r.miliseconds1==0?".0":("."+r.miliseconds1)} */}
             </td>
 
             <td>
@@ -18,18 +39,14 @@ function EstimatorResult({r}){
             </td>
 
             <td>
-                {r.minutes2==0 ? "" :(r.minutes2+":")}
-                {(r.seconds2<10 && r.minutes2!=0)?"0"+r.seconds2:r.seconds2}
-                {r.miliseconds2==0?".0":("."+r.miliseconds2)}
+               {timeFormater(r.minutes2, r.seconds2, r.miliseconds2)}
             </td>
 
             <td>
                 {r.eventEstimate}
             </td>
             <td>
-                {r.EstimateMinutes==0 ? "" :(r.EstimateMinutes+":")}
-                {(r.EstimateSeconds<10 && r.EstimateMinutes!=0)?"0"+r.EstimateSeconds:r.EstimateSeconds}
-                {r.EstimateMiliseconds==0?".0":("."+r.EstimateMiliseconds)}
+            {timeFormater(r.EstimateMinutes, r.EstimateSeconds, r.EstimateMiliseconds)}
             </td>
             <td>
                 <button id="remove"className="btn" >
