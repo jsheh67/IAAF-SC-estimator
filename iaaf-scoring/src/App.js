@@ -17,6 +17,7 @@ function App() {
   // const[currentEvent, setCurrentEvent]= useState({});
   // const[currentTime, setCurrentTime]= useState({});
   const[resultList, setResultList]=useState([]);
+  const[estResults, setEstResults]=useState([]);
 
   return (
     <div className="App ">
@@ -31,7 +32,9 @@ function App() {
             </Route>
 
             <Route path="/estimator" element={
-              <Estimator />
+              <Estimator 
+                estResults={estResults}
+                setEstResults={setEstResults}/>
               }>
             </Route>
 

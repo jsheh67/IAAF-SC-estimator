@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 
-function Estimator(){
+import EstimatorResultTable from "./EstimatorResultTable";
+
+function Estimator({estResults, setEstResults}){
 
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
@@ -117,6 +119,63 @@ function Estimator(){
         return points;
     }
 
+    const calculateTime=(event, points)=>{
+        let time;
+        switch(event){
+            case "100m":
+                time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, points);
+                break;
+            case "200m":
+                time=calcTime(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, points);
+                break;
+            case"300m":
+                time=calcTime(threeStats.min, threeStats.A, threeStats.c, points );
+                break;
+            case"400m":
+                time=calcTime(fourStats.min, fourStats.A, fourStats.c, points);
+                break;
+            case"500m":
+                time=calcTime(fiveStats.min, fiveStats.A, fiveStats.c, points);
+                break;
+            case"600m":
+                time=calcTime(sixStats.min, sixStats.A, sixStats.c, points);
+                break;
+            case"800m":
+                time=calcTime(eightStats.min, eightStats.A, eightStats.c, points);
+                break;
+            case"1000m":
+                time=calcTime(kStats.min, kStats.A, kStats.c, points);
+                break;
+            case"1500m":
+                time=calcTime(fifteenStats.min, fifteenStats.A, fifteenStats.c, points);
+                break;
+            case"1 mile":
+                time=calcTime(mileStats.min, mileStats.A, mileStats.c, points);
+                break;
+            case"1600m":
+                time=calcTime(mileStats.min, mileStats.A, mileStats.c, points);
+                time = time/1.005;
+                break;
+            case"3000m":
+                time=calcTime(threeKStats.min, threeKStats.A, threeKStats.c, points);
+                break;
+            case"3200m":
+                time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, points);
+                time = time/1.005;
+                break;
+            case"2 mile":
+                time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, points);
+                break;
+            case"5000m":
+                time=calcTime(fiveKStats.min, fiveKStats.A, fiveKStats.c, points);
+                break;
+            case"10000m":
+                time=calcTime(tenKStats.min, tenKStats.A, tenKStats.c, points);
+                break;
+        }
+        return time;
+    }
+
     const getDistance=(distance)=>{
         let result=0;
         if(distance=="1 mile"){
@@ -134,12 +193,15 @@ function Estimator(){
 
 
     const onSubmitEstimate=(OBJ)=>{
+       
+
         OBJ.time1= convertToSeconds(OBJ.minutes1, OBJ.seconds1, OBJ.miliseconds1);
         OBJ.time2= convertToSeconds(OBJ.minutes2, OBJ.seconds2, OBJ.miliseconds2);
 
         let distance1=getDistance(OBJ.event1);
         let distance2=getDistance(OBJ.event2);
         let distanceEstimate=getDistance(OBJ.eventEstimate);
+
 
         let event1Points=getPoints(OBJ.event1, OBJ.time1);
         console.log(event1Points);
@@ -148,12 +210,26 @@ function Estimator(){
         console.log(event2Points);
 
         let slope =((event1Points-event2Points)/(distance1-distance2))
-
         let estimatedPoints = Math.ceil(slope*(distanceEstimate-distance1)+event1Points);
         
         console.log("Estimation");
         console.log(estimatedPoints);
 
+        let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints);
+        console.log(estimatedTime);
+
+        let timeSeconds = parseFloat(estimatedTime);
+        console.log(timeSeconds);
+        let secs= (timeSeconds%60);
+        OBJ.EstimateMiliseconds= Math.ceil((secs%1).toFixed(2)*100);
+        OBJ.EstimateSeconds=Math.floor(secs);
+        OBJ.EstimateMinutes= Math.floor(timeSeconds/60);
+        console.log(OBJ);
+
+        setEstResults([OBJ, ...estResults]);
+        
+        console.log(estResults);
+       
     }
 
     return(
@@ -258,6 +334,15 @@ function Estimator(){
                     </form>
                 </div>
 
+        
+
+            </div>
+
+            <div className="col-5 me-5 ">
+                <EstimatorResultTable 
+                    estResults={estResults}
+                    setEstResults={setEstResults}
+                />
             </div>
 
         </div>

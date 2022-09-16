@@ -10,7 +10,7 @@ function Result({r, resultList, setResultList}){
         <tr className="resultRow">        
             <td>{r.gender} {r.event}</td>
             <td>{r.minutes==0 ? "" :(r.minutes+":")}
-                {(r.seconds<10 && r.minutes!=0)?"0"+r.seconds:r.seconds}
+                {(r.seconds<10 && r.minutes!=0 )?"0"+r.seconds:r.seconds}
                 {r.miliseconds==0?".0":("."+r.miliseconds)}
             </td>
             <td>{r.points}</td>
