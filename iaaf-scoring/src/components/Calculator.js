@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 
 import ResultTable from "./ResultTable";
+import {calcPoints, calcTime, convertToSeconds } from "./Functions"
 
 function Calculator({resultList, setResultList}){
 
     const[resultId, setResultId]= useState(1);
     console.log(resultId);
 
-   
     const idIncrement = ()=>{
         setResultId(resultId=>resultId+1);
     };
@@ -41,37 +41,6 @@ function Calculator({resultList, setResultList}){
             return(<option key={e+"key"} value={e}>{e}</option >)
         }))
     } 
-
-    const calcPoints=(min, a, c, time)=>{
-        if(time>min){
-            return 0;
-        }else{
-            return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
-        }
-    }
-
-    const calcTime=(min, a, c,points)=>{
-        return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
-    }
-
-    const convertToSeconds=(min, sec, mili)=>{
-        const length= (mili + '').replace('.', '').length;
-        sec=parseInt(sec);
-        min=parseInt(min);
-        mili=parseInt(mili);
-
-        if(isNaN(mili)){
-            mili=0;
-        }
-        if(isNaN(sec)){
-            sec=0;
-        }
-        if(isNaN(min)){
-            min=0;
-        }
-        return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
-    }
-    
 
     const onSubmitCalcPoints=(OBJ)=>{
         
@@ -213,13 +182,6 @@ function Calculator({resultList, setResultList}){
         console.log(resultList);
     }
        
-        
-
-
-
-
-
-    
     return(
         <div className="d-flex  justify-content-start">
         <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border ">

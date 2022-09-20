@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 
 import EstimatorResultTable from "./EstimatorResultTable";
+import { getDistance, calcPoints, calcTime, convertToSeconds } from "./Functions";
 
 function Estimator({estResults, setEstResults}){
 
@@ -39,34 +40,34 @@ function Estimator({estResults, setEstResults}){
         }))
     } 
 
-    const calcPoints=(min, a, c, time)=>{
-        if(time>min){
-            return 0;
-        }else{
-            return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
-        }
-    }
+    // const calcPoints=(min, a, c, time)=>{
+    //     if(time>min){
+    //         return 0;
+    //     }else{
+    //         return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
+    //     }
+    // }
 
-    const calcTime=(min, a, c,points)=>{
-        return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
-    }
+    // const calcTime=(min, a, c,points)=>{
+    //     return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
+    // }
 
-    const convertToSeconds=(min, sec, mili)=>{
-        const length= (mili + '').replace('.', '').length;
-        sec=parseInt(sec);
-        min=parseInt(min);
-        mili=parseInt(mili);
-        if(isNaN(mili)){
-            mili=0;
-        }
-        if(isNaN(sec)){
-            sec=0;
-        }
-        if(isNaN(min)){
-            min=0;
-        }
-        return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
-    }
+    // const convertToSeconds=(min, sec, mili)=>{
+    //     const length= (mili + '').replace('.', '').length;
+    //     sec=parseInt(sec);
+    //     min=parseInt(min);
+    //     mili=parseInt(mili);
+    //     if(isNaN(mili)){
+    //         mili=0;
+    //     }
+    //     if(isNaN(sec)){
+    //         sec=0;
+    //     }
+    //     if(isNaN(min)){
+    //         min=0;
+    //     }
+    //     return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
+    // }
 
     const getPoints=(event, time)=>{
         let points;
@@ -182,18 +183,18 @@ function Estimator({estResults, setEstResults}){
         return time;
     }
 
-    const getDistance=(distance)=>{
-        let result=0;
-        if(distance=="1 mile"){
-            result= 1609;
-        }else if(distance=="2 mile"){
-            result= 3218;
-        }else{
-            result=distance.substring(0,distance.length -1);
-        }
-        console.log(result)
-        return result;
-    }
+    // const getDistance=(distance)=>{
+    //     let result=0;
+    //     if(distance=="1 mile"){
+    //         result= 1609;
+    //     }else if(distance=="2 mile"){
+    //         result= 3218;
+    //     }else{
+    //         result=distance.substring(0,distance.length -1);
+    //     }
+    //     console.log(result)
+    //     return result;
+    // }
 
 
 
@@ -320,7 +321,8 @@ function Estimator({estResults, setEstResults}){
 
                     <hr className="mt-4"></hr>
 
-                    <div className="form-group py-1 pb-3">
+                <div className="row align-items-end">
+                    <div className="col-7form-group py-1 pb-3">
                         <label className="form-label " htmlFor="selectEvent1">Event to Estimate</label>
                         <select className="form-control" id="selectEvent1"
                         {...register("eventEstimate",{required:""})}>
@@ -331,14 +333,18 @@ function Estimator({estResults, setEstResults}){
                         {/* <p className="form-error-message">{errors.types?.message}</p> */}
                     </div>
 
+                  
+                    <div class="col-5 form-check py-1 pb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Main Event
+                    </label>
+                    </div>
+                </div>
+
                     <div className="row">
                         <button onClick={handleSubmit(onSubmitEstimate)} type="submit" className="btn get col mx-3 mb-2" >Estimate Time</button>
                     </div>
-
-
-
-
-
 
                     </form>
                 </div>
