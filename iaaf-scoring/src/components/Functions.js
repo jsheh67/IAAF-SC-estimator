@@ -1,16 +1,17 @@
-export function calcPoints(min, a, c, time){
+const functions={
+    calcPoints: function (min, a, c, time){
     if(time>min){
         return 0;
     }else{
         return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
     }
-}
+},
 
-export function calcTime(min, a, c,points){
+    calcTime: function (min, a, c,points){
     return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
-}
+},
 
-export function convertToSeconds(min, sec, mili){
+    convertToSeconds: function (min, sec, mili){
     const length= (mili + '').replace('.', '').length;
     sec=parseInt(sec);
     min=parseInt(min);
@@ -26,10 +27,10 @@ export function convertToSeconds(min, sec, mili){
         min=0;
     }
     return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
-}
+},
 
 //---ESTIMATOR---------------
-export function getDistance(distance){
+getDistance: function(distance){
     let result=0;
     if(distance=="1 mile"){
         result= 1609;
@@ -41,3 +42,6 @@ export function getDistance(distance){
     console.log(result)
     return result;
 }
+}
+
+module.exports= functions
