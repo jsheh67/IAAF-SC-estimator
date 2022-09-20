@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 
 import ResultTable from "./ResultTable";
-import {calcPoints, calcTime, convertToSeconds } from "./Functions"
+import * as D from "./Data";
+import {calcPoints, calcTime, convertToSeconds } from "./Functions";
 
 function Calculator({resultList, setResultList}){
 
@@ -20,20 +21,20 @@ function Calculator({resultList, setResultList}){
     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
                 "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
     
-    const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
-    const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
-    const threeStats={"min":57.169, "A":1.85, "c":1.9971}
-    const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
-    const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
-    const sixStats={"min":128.919, "A":0.43976, "c":1.972}
-    const eightStats={"min":181.04, "A":0.2341, "c":1.967}
-    const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
-    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
-    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
-    const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
-    const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
-    const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
-    const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
+    // const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
+    // const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
+    // const threeStats={"min":57.169, "A":1.85, "c":1.9971}
+    // const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
+    // const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
+    // const sixStats={"min":128.919, "A":0.43976, "c":1.972}
+    // const eightStats={"min":181.04, "A":0.2341, "c":1.967}
+    // const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
+    // const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
+    // const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
+    // const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
+    // const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
+    // const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
+    // const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
 
 
     const eventSelectionFactory=()=>{
@@ -51,53 +52,53 @@ function Calculator({resultList, setResultList}){
 
         switch(OBJ.event){
             case "100 m":
-                OBJ.points=calcPoints(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, OBJ.time);
                 break;
             case "200m":
-                OBJ.points=calcPoints(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, OBJ.time);
                 break;
             case"300m":
-                OBJ.points=calcPoints(threeStats.min, threeStats.A, threeStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.threeStats.min, D.threeStats.A, D.threeStats.c, OBJ.time);
                 break;
             case"400m":
-                OBJ.points=calcPoints(fourStats.min, fourStats.A, fourStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.fourStats.min, D.fourStats.A, D.fourStats.c, OBJ.time);
                 break;
             case"500m":
-                OBJ.points=calcPoints(fiveStats.min, fiveStats.A, fiveStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, OBJ.time);
                 break;
             case"600m":
-                OBJ.points=calcPoints(sixStats.min, sixStats.A, sixStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.sixStats.min, D.sixStats.A, D.sixStats.c, OBJ.time);
                 break;
             case"800m":
-                OBJ.points=calcPoints(eightStats.min, eightStats.A, eightStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.eightStats.min, D.eightStats.A, D.eightStats.c, OBJ.time);
                 break;
             case"1000m":
-                OBJ.points=calcPoints(kStats.min, kStats.A, kStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.kStats.min, D.kStats.A, D.kStats.c, OBJ.time);
                 break;
             case"1500m":
-                OBJ.points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, OBJ.time);
                 break;
             case "1600m":
                 OBJ.time = OBJ.time*1.005;
-                OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time)
+                OBJ.points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.time)
             case"1 mile":
-                OBJ.points=calcPoints(mileStats.min, mileStats.A, mileStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.time);
                 break;
             case"3000m":
-                OBJ.points=calcPoints(threeKStats.min, threeKStats.A, threeKStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, OBJ.time);
                 break;
             case"3200m":
                 OBJ.time = OBJ.time*1.005;
-                OBJ.points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.time);
                 break;
             case"2 mile":
-                OBJ.points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.time);
                 break;
             case"5000m":
-                OBJ.points=calcPoints(fiveKStats.min, fiveKStats.A, fiveKStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, OBJ.time);
                 break;
             case"10000m":
-                OBJ.points=calcPoints(tenKStats.min, tenKStats.A, tenKStats.c, OBJ.time);
+                OBJ.points=calcPoints(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, OBJ.time);
                 break;
 
 
@@ -119,54 +120,54 @@ function Calculator({resultList, setResultList}){
 
         switch(OBJ.event){
             case "100 m":
-                OBJ.time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, OBJ.points);
+                OBJ.time=calcTime(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, OBJ.points);
                 break;
             case "200m":
-                OBJ.time=calcTime(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, OBJ.points);
+                OBJ.time=calcTime(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, OBJ.points);
                 break;
             case"300m":
-                OBJ.time=calcTime(threeStats.min, threeStats.A, threeStats.c,OBJ.points );
+                OBJ.time=calcTime(D.threeStats.min, D.threeStats.A, D.threeStats.c,OBJ.points );
                 break;
             case"400m":
-                OBJ.time=calcTime(fourStats.min, fourStats.A, fourStats.c, OBJ.points);
+                OBJ.time=calcTime(D.fourStats.min, D.fourStats.A, D.fourStats.c, OBJ.points);
                 break;
             case"500m":
-                OBJ.time=calcTime(fiveStats.min, fiveStats.A, fiveStats.c, OBJ.points);
+                OBJ.time=calcTime(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, OBJ.points);
                 break;
             case"600m":
-                OBJ.time=calcTime(sixStats.min, sixStats.A, sixStats.c, OBJ.points);
+                OBJ.time=calcTime(D.sixStats.min, D.sixStats.A, D.sixStats.c, OBJ.points);
                 break;
             case"800m":
-                OBJ.time=calcTime(eightStats.min, eightStats.A, eightStats.c, OBJ.points);
+                OBJ.time=calcTime(D.eightStats.min, D.eightStats.A, D.eightStats.c, OBJ.points);
                 break;
             case"1000m":
-                OBJ.time=calcTime(kStats.min, kStats.A, kStats.c, OBJ.points);
+                OBJ.time=calcTime(D.kStats.min, D.kStats.A, D.kStats.c, OBJ.points);
                 break;
             case"1500m":
-                OBJ.time=calcTime(fifteenStats.min, fifteenStats.A, fifteenStats.c, OBJ.points);
+                OBJ.time=calcTime(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, OBJ.points);
                 break;
             case"1 mile":
-                OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
+                OBJ.time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.points);
                 break;
             case"1600m":
-                OBJ.time=calcTime(mileStats.min, mileStats.A, mileStats.c, OBJ.points);
+                OBJ.time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.points);
                 OBJ.time = OBJ.time/1.005;
                 break;
             case"3000m":
-                OBJ.time=calcTime(threeKStats.min, threeKStats.A, threeKStats.c, OBJ.points);
+                OBJ.time=calcTime(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, OBJ.points);
                 break;
             case"3200m":
-                OBJ.time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.points);
+                OBJ.time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.points);
                 OBJ.time = OBJ.time/1.005;
                 break;
             case"2 mile":
-                OBJ.time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, OBJ.points);
+                OBJ.time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.points);
                 break;
             case"5000m":
-                OBJ.time=calcTime(fiveKStats.min, fiveKStats.A, fiveKStats.c, OBJ.points);
+                OBJ.time=calcTime(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, OBJ.points);
                 break;
             case"10000m":
-                OBJ.time=calcTime(tenKStats.min, tenKStats.A, tenKStats.c, OBJ.points);
+                OBJ.time=calcTime(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, OBJ.points);
                 break;
         }
 
@@ -223,16 +224,16 @@ function Calculator({resultList, setResultList}){
                 <div className="row ">
                     
                 <div className="form-group col-6">  
-                <div class="input-group ">
+                <div className="input-group ">
                     <input type="number" aria-label="minutes" className="form-control"
                         placeholder="mm"
                          {...register("minutes")}/>
-                    <span class="input-group-text">:</span>
+                    <span className="input-group-text">:</span>
                     <input type="number" aria-label="seconds" className="form-control"
                         placeholder="ss"
                         {...register("seconds")}/>
                         
-                    <span class="input-group-text">.</span>
+                    <span className="input-group-text">.</span>
                     <input type="number" aria-label="miliseconds" className="form-control"
                         placeholder="ms"
                         {...register("miliseconds")}/>

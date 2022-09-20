@@ -30,18 +30,18 @@ const functions={
 },
 
 //---ESTIMATOR---------------
-getDistance: function(distance){
-    let result=0;
-    if(distance=="1 mile"){
-        result= 1609;
-    }else if(distance=="2 mile"){
-        result= 3218;
-    }else{
-        result=distance.substring(0,distance.length -1);
+    getDistance: function(distance){
+        let result=0;
+        if(distance=="1 mile"){
+            result= 1609;
+        }else if(distance=="2 mile"){
+            result= 3218;
+        }else{
+            result=distance.substring(0,distance.length -1);
+        }
+        console.log(result)
+        return result;
     }
-    console.log(result)
-    return result;
-}
 }
 
 module.exports= functions
