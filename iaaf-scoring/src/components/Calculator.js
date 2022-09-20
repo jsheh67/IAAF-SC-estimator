@@ -8,7 +8,6 @@ import {calcPoints, calcTime, convertToSeconds } from "./Functions";
 function Calculator({resultList, setResultList}){
 
     const[resultId, setResultId]= useState(1);
-    console.log(resultId);
 
     const idIncrement = ()=>{
         setResultId(resultId=>resultId+1);
@@ -20,21 +19,6 @@ function Calculator({resultList, setResultList}){
 
     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
                 "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
-    
-    // const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
-    // const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
-    // const threeStats={"min":57.169, "A":1.85, "c":1.9971}
-    // const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
-    // const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
-    // const sixStats={"min":128.919, "A":0.43976, "c":1.972}
-    // const eightStats={"min":181.04, "A":0.2341, "c":1.967}
-    // const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
-    // const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
-    // const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
-    // const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
-    // const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
-    // const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
-    // const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
 
 
     const eventSelectionFactory=()=>{

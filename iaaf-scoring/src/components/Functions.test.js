@@ -45,7 +45,7 @@ describe("Calc Time Tests",()=>{
     });
 })
 
-describe("Convert To total Seconds test",()=>{
+describe("Convert To total Seconds tests",()=>{
     test("can calculate with minutes",()=>{
         expect(functions.convertToSeconds(20,32,60)).toBe(1232.6);
     });
@@ -57,5 +57,17 @@ describe("Convert To total Seconds test",()=>{
     });
     test("can calculate with naN seconds",()=>{
         expect(functions.convertToSeconds(5,"po",98)).toBe(300.98);
+    });
+})
+
+describe("Get Distance tests",()=>{
+    test("should get 1609 for mile",()=>{
+        expect(functions.getDistance("1 mile")).toBe(1609);
+    });
+    test("should get 3218 for 2 mile",()=>{
+        expect(functions.getDistance("2 mile")).toBe(3218);
+    });
+    test("should get 5000 for 5000m",()=>{
+        expect(functions.getDistance("5000m")).toBe("5000");
     });
 })

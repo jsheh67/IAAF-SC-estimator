@@ -1,14 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
-
 import EstimatorResultTable from "./EstimatorResultTable";
+
 import { getDistance, calcPoints, calcTime, convertToSeconds } from "./Functions";
+import * as D from "./Data";
 
 function Estimator({estResults, setEstResults}){
-
-    const { register, handleSubmit, setValue,formState: { errors } } = useForm({
-        mode: "onChange"
-    });
 
     const[resultId, setResultId]= useState(1);
 
@@ -16,20 +13,9 @@ function Estimator({estResults, setEstResults}){
         setResultId(resultId=>resultId+1);
     };
 
-    const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
-    const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
-    const threeStats={"min":57.169, "A":1.85, "c":1.9971}
-    const fourStats={"min":78.9, "A":1.0547, "c":1.9923}
-    const fiveStats={"min":103.74, "A":0.62169, "c":1.9869}
-    const sixStats={"min":128.919, "A":0.43976, "c":1.972}
-    const eightStats={"min":181.04, "A":0.2341, "c":1.967}
-    const kStats={"min":235.92, "A":0.1399, "c":1.959} // could use some work sumsq kinda high here
-    const fifteenStats={"min":382.6006, "A":0.05070779, "c":1.9624}
-    const mileStats={"min":411.2607, "A":0.04853, "c":1.9455} 
-    const threeKStats ={"min":831.72, "A":0.0120116, "c":1.94188} 
-    const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
-    const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
-    const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606} 
+    const { register, handleSubmit, setValue,formState: { errors } } = useForm({
+        mode: "onChange"
+    });
 
     const events=["100m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
                 "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
@@ -40,86 +26,60 @@ function Estimator({estResults, setEstResults}){
         }))
     } 
 
-    // const calcPoints=(min, a, c, time)=>{
-    //     if(time>min){
-    //         return 0;
-    //     }else{
-    //         return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
-    //     }
-    // }
-
-    // const calcTime=(min, a, c,points)=>{
-    //     return (-((Math.pow((points/a),(1/c)))-min)).toFixed(2);
-    // }
-
-    // const convertToSeconds=(min, sec, mili)=>{
-    //     const length= (mili + '').replace('.', '').length;
-    //     sec=parseInt(sec);
-    //     min=parseInt(min);
-    //     mili=parseInt(mili);
-    //     if(isNaN(mili)){
-    //         mili=0;
-    //     }
-    //     if(isNaN(sec)){
-    //         sec=0;
-    //     }
-    //     if(isNaN(min)){
-    //         min=0;
-    //     }
-    //     return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
+  
     // }
 
     const getPoints=(event, time)=>{
         let points;
         switch(event){
             case "100m":
-                points=calcPoints(hundredStats.min, hundredStats.A, hundredStats.c, time);
+                points=calcPoints(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, time);
                 break;
             case "200m":
-                points=calcPoints(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, time);
+                points=calcPoints(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, time);
                 break;
             case"300m":
-                points=calcPoints(threeStats.min, threeStats.A, threeStats.c,time);
+                points=calcPoints(D.threeStats.min, D.threeStats.A, D.threeStats.c,time);
                 break;
             case"400m":
-                points=calcPoints(fourStats.min, fourStats.A, fourStats.c, time);
+                points=calcPoints(D.fourStats.min, D.fourStats.A, D.fourStats.c, time);
                 break;
             case"500m":
-                points=calcPoints(fiveStats.min, fiveStats.A, fiveStats.c,time);
+                points=calcPoints(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c,time);
                 break;
             case"600m":
-                points=calcPoints(sixStats.min, sixStats.A, sixStats.c, time);
+                points=calcPoints(D.sixStats.min, D.sixStats.A, D.sixStats.c, time);
                 break;
             case"800m":
-                points=calcPoints(eightStats.min, eightStats.A, eightStats.c, time);
+                points=calcPoints(D.eightStats.min, D.eightStats.A, D.eightStats.c, time);
                 break;
             case"1000m":
-                points=calcPoints(kStats.min, kStats.A, kStats.c, time);
+                points=calcPoints(D.kStats.min, D.kStats.A, D.kStats.c, time);
                 break;
             case"1500m":
-                points=calcPoints(fifteenStats.min, fifteenStats.A, fifteenStats.c, time);
+                points=calcPoints(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, time);
                 break;
             case"1600m":
                 time = time*1.005;
-                points=calcPoints(mileStats.min, mileStats.A, mileStats.c, time)
+                points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, time)
             case"1 mile":
-                points=calcPoints(mileStats.min, mileStats.A, mileStats.c, time);
+                points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, time);
                 break;
             case"3000m":
-                points=calcPoints(threeKStats.min, threeKStats.A, threeKStats.c, time);
+                points=calcPoints(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, time);
                 break;
             case"3200m":
                 time = time*1.005;
-                points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, time);
+                points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, time);
                 break;
             case"2 mile":
-                points=calcPoints(twoMStats.min, twoMStats.A, twoMStats.c, time);
+                points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, time);
                 break;
             case"5000m":
-                points=calcPoints(fiveKStats.min, fiveKStats.A, fiveKStats.c,time);
+                points=calcPoints(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c,time);
                 break;
             case"10000m":
-                points=calcPoints(tenKStats.min, tenKStats.A, tenKStats.c, time);
+                points=calcPoints(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, time);
                 break;
 
         }
@@ -130,73 +90,58 @@ function Estimator({estResults, setEstResults}){
         let time;
         switch(event){
             case "100m":
-                time=calcTime(hundredStats.min, hundredStats.A, hundredStats.c, points);
+                time=calcTime(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, points);
                 break;
             case "200m":
-                time=calcTime(twoHundredStats.min, twoHundredStats.A, twoHundredStats.c, points);
+                time=calcTime(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, points);
                 break;
             case"300m":
-                time=calcTime(threeStats.min, threeStats.A, threeStats.c, points );
+                time=calcTime(D.threeStats.min, D.threeStats.A, D.threeStats.c, points );
                 break;
             case"400m":
-                time=calcTime(fourStats.min, fourStats.A, fourStats.c, points);
+                time=calcTime(D.fourStats.min, D.fourStats.A, D.fourStats.c, points);
                 break;
             case"500m":
-                time=calcTime(fiveStats.min, fiveStats.A, fiveStats.c, points);
+                time=calcTime(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, points);
                 break;
             case"600m":
-                time=calcTime(sixStats.min, sixStats.A, sixStats.c, points);
+                time=calcTime(D.sixStats.min, D.sixStats.A, D.sixStats.c, points);
                 break;
             case"800m":
-                time=calcTime(eightStats.min, eightStats.A, eightStats.c, points);
+                time=calcTime(D.eightStats.min, D.eightStats.A, D.eightStats.c, points);
                 break;
             case"1000m":
-                time=calcTime(kStats.min, kStats.A, kStats.c, points);
+                time=calcTime(D.kStats.min, D.kStats.A, D.kStats.c, points);
                 break;
             case"1500m":
-                time=calcTime(fifteenStats.min, fifteenStats.A, fifteenStats.c, points);
+                time=calcTime(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, points);
                 break;
             case"1 mile":
-                time=calcTime(mileStats.min, mileStats.A, mileStats.c, points);
+                time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, points);
                 break;
             case"1600m":
-                time=calcTime(mileStats.min, mileStats.A, mileStats.c, points);
+                time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, points);
                 time = time/1.005;
                 break;
             case"3000m":
-                time=calcTime(threeKStats.min, threeKStats.A, threeKStats.c, points);
+                time=calcTime(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, points);
                 break;
             case"3200m":
-                time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, points);
+                time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, points);
                 time = time/1.005;
                 break;
             case"2 mile":
-                time=calcTime(twoMStats.min, twoMStats.A, twoMStats.c, points);
+                time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, points);
                 break;
             case"5000m":
-                time=calcTime(fiveKStats.min, fiveKStats.A, fiveKStats.c, points);
+                time=calcTime(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, points);
                 break;
             case"10000m":
-                time=calcTime(tenKStats.min, tenKStats.A, tenKStats.c, points);
+                time=calcTime(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, points);
                 break;
         }
         return time;
     }
-
-    // const getDistance=(distance)=>{
-    //     let result=0;
-    //     if(distance=="1 mile"){
-    //         result= 1609;
-    //     }else if(distance=="2 mile"){
-    //         result= 3218;
-    //     }else{
-    //         result=distance.substring(0,distance.length -1);
-    //     }
-    //     console.log(result)
-    //     return result;
-    // }
-
-
 
 
     const onSubmitEstimate=(OBJ)=>{
@@ -221,9 +166,6 @@ function Estimator({estResults, setEstResults}){
         //might re work this-- logistic function maybe?
         let slope =((event1Points-event2Points)/(distance1-distance2))
         let estimatedPoints = Math.ceil(slope*(distanceEstimate-distance1)+event1Points);
-        
-        console.log("Estimation");
-        console.log(estimatedPoints);
 
         let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints);
         console.log(estimatedTime);
@@ -237,9 +179,6 @@ function Estimator({estResults, setEstResults}){
         console.log(OBJ);
 
         setEstResults([OBJ, ...estResults]);
-        
-        console.log(estResults);
-       
     }
 
     return(
