@@ -16,7 +16,14 @@ public class test {
         String result= driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td[3]")).getText();
         //1400 is score from iaaf tables;
         Assert.assertEquals(expected,result);
+    }
 
+    public void checkTime(int points, String expected) throws InterruptedException {
+        driver.findElement(By.id("men")).click();
+        driver.findElement(By.id("points")).sendKeys(String.valueOf(points));
+        driver.findElement(By.id("calcTime")).click();
+        String time= driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td[2]")).getText();
+        Assert.assertEquals(time, expected);
     }
 
     @BeforeClass
@@ -30,8 +37,24 @@ public class test {
     public void checkTitle(){
         String title = driver.getTitle();
         Assert.assertEquals(title, "IAAF calculator");
+        Assert.assertEquals(driver.getCurrentUrl(), "http://localhost:3000/");
+    }
+    @Test
+    public void navigateToEstimator(){
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/a[2]/h2")).click();
+        String estimatorURl= driver.getCurrentUrl();
+        Assert.assertEquals(estimatorURl,"http://localhost:3000/estimator");
     }
 
+    @Test
+    public void navigateToGithub(){
+        driver.findElement(By.className("bi-github")).click();
+        String estimatorURl= driver.getCurrentUrl();
+        Assert.assertEquals(estimatorURl,"https://github.com/jsheh67/IAAF-SC-estimator");
+    }
+
+
+//---calculating points---------------
     @Test
     public void checkMax100m(){
         checkScore(null,9,46, "1400");
@@ -42,10 +65,24 @@ public class test {
         checkScore(null,20,46, "0");
     }
 
+//---calculating times--------------------
+    @Test
+    public void check900point100m() throws InterruptedException {
+        checkTime(900, "10.96");
+    }
+
+    @Test
+    public void check0point100m() throws InterruptedException {
+        checkTime(0, "16.96");
+    }
+
+
+//--tear-down----------------
 
     @AfterMethod
     public void clearResults(){
 //        driver.findElement(By.id("clearButton")).click()
+        driver.navigate().to("http://localhost:3000/");
         driver.navigate().refresh();
     }
 
