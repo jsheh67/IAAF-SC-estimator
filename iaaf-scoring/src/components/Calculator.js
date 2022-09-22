@@ -209,16 +209,16 @@ function Calculator({resultList, setResultList}){
                     
                 <div className="form-group col-6">  
                 <div className="input-group ">
-                    <input type="number" aria-label="minutes" className="form-control"
+                    <input id="min" type="number" aria-label="minutes" className="form-control"
                         placeholder="mm"
                          {...register("minutes")}/>
                     <span className="input-group-text">:</span>
-                    <input type="number" aria-label="seconds" className="form-control"
+                    <input id="sec" type="number" aria-label="seconds" className="form-control"
                         placeholder="ss"
                         {...register("seconds")}/>
                         
                     <span className="input-group-text">.</span>
-                    <input type="number" aria-label="miliseconds" className="form-control"
+                    <input id="ms" type="number" aria-label="miliseconds" className="form-control"
                         placeholder="ms"
                         {...register("miliseconds")}/>
                 </div>
@@ -237,8 +237,8 @@ function Calculator({resultList, setResultList}){
                 <div className="row">
                     <h5>Calculate</h5>
                     
-                    <button  onClick={handleSubmit(onSubmitCalcPoints)} type="submit" className="btn get col mx-3 mb-2"> Points</button>
-                    <button  onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn  get col mx-3 mb-2"> Time</button>
+                    <button  id="calcPoints" onClick={handleSubmit(onSubmitCalcPoints)} type="submit" className="btn get col mx-3 mb-2"> Points</button>
+                    <button  id="calcTime" onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn  get col mx-3 mb-2"> Time</button>
                 </div>
             </form>
             </div>
