@@ -12,12 +12,16 @@ i{
     position: sticky;
 } */
 
+.overallBG{
+    background-color: #f2ffd2;
+}
+
 .form-label{
     font-weight: bold;
 }
 
-.nav-link.text-light.text-muted:hover{
-    color: whitesmoke !important;
+.nav-link.text-light:hover{
+    color: #F7DD04 !important;
 }
 
 .col.transition{
@@ -36,7 +40,7 @@ i{
 }
 
 .get:hover{
-    color: rgb(121, 1, 1) !important;
+    color:#7d7000 !important;
     background-color: #d5d5d5 !important;
     border: solid black 1px;
 
@@ -56,10 +60,17 @@ i{
     background-color: white;
     font-weight: bolder;
 }
+#header{
+    background-color: #BD3F25;
+}
+
+#header2{
+    background-color: #8FB337;
+}
 
 #clearButton{
     background-color: white;
-    color: rgb(50, 50, 50);
+    color: #556a1f;
 }
 
 
