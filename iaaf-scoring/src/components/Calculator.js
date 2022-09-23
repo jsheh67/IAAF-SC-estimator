@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import ResultTable from "./ResultTable";
 import * as D from "./Data";
-import {calcPoints, calcTime, convertToSeconds } from "./Functions";
+import {calcPoints, calcTime, convertToSeconds, getConstants } from "./Functions";
 
 function Calculator({resultList, setResultList}){
 
@@ -34,59 +34,9 @@ function Calculator({resultList, setResultList}){
 
         OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
 
-        switch(OBJ.event){
-            case "100 m":
-                OBJ.points=calcPoints(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, OBJ.time);
-                break;
-            case "200m":
-                OBJ.points=calcPoints(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, OBJ.time);
-                break;
-            case"300m":
-                OBJ.points=calcPoints(D.threeStats.min, D.threeStats.A, D.threeStats.c, OBJ.time);
-                break;
-            case"400m":
-                OBJ.points=calcPoints(D.fourStats.min, D.fourStats.A, D.fourStats.c, OBJ.time);
-                break;
-            case"500m":
-                OBJ.points=calcPoints(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, OBJ.time);
-                break;
-            case"600m":
-                OBJ.points=calcPoints(D.sixStats.min, D.sixStats.A, D.sixStats.c, OBJ.time);
-                break;
-            case"800m":
-                OBJ.points=calcPoints(D.eightStats.min, D.eightStats.A, D.eightStats.c, OBJ.time);
-                break;
-            case"1000m":
-                OBJ.points=calcPoints(D.kStats.min, D.kStats.A, D.kStats.c, OBJ.time);
-                break;
-            case"1500m":
-                OBJ.points=calcPoints(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, OBJ.time);
-                break;
-            case "1600m":
-                OBJ.time = OBJ.time*1.005;
-                OBJ.points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.time)
-            case"1 mile":
-                OBJ.points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.time);
-                break;
-            case"3000m":
-                OBJ.points=calcPoints(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, OBJ.time);
-                break;
-            case"3200m":
-                OBJ.time = OBJ.time*1.005;
-                OBJ.points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.time);
-                break;
-            case"2 mile":
-                OBJ.points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.time);
-                break;
-            case"5000m":
-                OBJ.points=calcPoints(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, OBJ.time);
-                break;
-            case"10000m":
-                OBJ.points=calcPoints(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, OBJ.time);
-                break;
+        let c= getConstants(OBJ.event);
+        OBJ.points = calcPoints(c.min, c.A, c.c, OBJ.time);
 
-
-        }
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
@@ -102,59 +52,8 @@ function Calculator({resultList, setResultList}){
         OBJ.id=resultId;
         idIncrement();
 
-        switch(OBJ.event){
-            case "100 m":
-                OBJ.time=calcTime(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, OBJ.points);
-                break;
-            case "200m":
-                OBJ.time=calcTime(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, OBJ.points);
-                break;
-            case"300m":
-                OBJ.time=calcTime(D.threeStats.min, D.threeStats.A, D.threeStats.c,OBJ.points );
-                break;
-            case"400m":
-                OBJ.time=calcTime(D.fourStats.min, D.fourStats.A, D.fourStats.c, OBJ.points);
-                break;
-            case"500m":
-                OBJ.time=calcTime(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, OBJ.points);
-                break;
-            case"600m":
-                OBJ.time=calcTime(D.sixStats.min, D.sixStats.A, D.sixStats.c, OBJ.points);
-                break;
-            case"800m":
-                OBJ.time=calcTime(D.eightStats.min, D.eightStats.A, D.eightStats.c, OBJ.points);
-                break;
-            case"1000m":
-                OBJ.time=calcTime(D.kStats.min, D.kStats.A, D.kStats.c, OBJ.points);
-                break;
-            case"1500m":
-                OBJ.time=calcTime(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, OBJ.points);
-                break;
-            case"1 mile":
-                OBJ.time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.points);
-                break;
-            case"1600m":
-                OBJ.time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, OBJ.points);
-                OBJ.time = OBJ.time/1.005;
-                break;
-            case"3000m":
-                OBJ.time=calcTime(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, OBJ.points);
-                break;
-            case"3200m":
-                OBJ.time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.points);
-                OBJ.time = OBJ.time/1.005;
-                break;
-            case"2 mile":
-                OBJ.time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, OBJ.points);
-                break;
-            case"5000m":
-                OBJ.time=calcTime(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, OBJ.points);
-                break;
-            case"10000m":
-                OBJ.time=calcTime(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, OBJ.points);
-                break;
-        }
-
+        let c= getConstants(OBJ.event);
+        OBJ.time=calcTime(c.min, c.A, c.c, OBJ.points);
 
         let timeSeconds = parseFloat(OBJ.time);
         console.log(timeSeconds);

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import EstimatorResultTable from "./EstimatorResultTable";
 
-import { getDistance, calcPoints, calcTime, convertToSeconds } from "./Functions";
+import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants  } from "./Functions";
 import * as D from "./Data";
 
 function Estimator({estResults, setEstResults}){
@@ -18,7 +18,7 @@ function Estimator({estResults, setEstResults}){
     });
 
     const events=["100m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
-                "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
+                "1600m","1 mile", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
     
     const eventSelectionFactory=()=>{
         return(events.map(e=>{
@@ -30,116 +30,16 @@ function Estimator({estResults, setEstResults}){
     // }
 
     const getPoints=(event, time)=>{
-        let points;
-        switch(event){
-            case "100m":
-                points=calcPoints(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, time);
-                break;
-            case "200m":
-                points=calcPoints(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, time);
-                break;
-            case"300m":
-                points=calcPoints(D.threeStats.min, D.threeStats.A, D.threeStats.c,time);
-                break;
-            case"400m":
-                points=calcPoints(D.fourStats.min, D.fourStats.A, D.fourStats.c, time);
-                break;
-            case"500m":
-                points=calcPoints(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c,time);
-                break;
-            case"600m":
-                points=calcPoints(D.sixStats.min, D.sixStats.A, D.sixStats.c, time);
-                break;
-            case"800m":
-                points=calcPoints(D.eightStats.min, D.eightStats.A, D.eightStats.c, time);
-                break;
-            case"1000m":
-                points=calcPoints(D.kStats.min, D.kStats.A, D.kStats.c, time);
-                break;
-            case"1500m":
-                points=calcPoints(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, time);
-                break;
-            case"1600m":
-                time = time*1.005;
-                points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, time)
-            case"1 mile":
-                points=calcPoints(D.mileStats.min, D.mileStats.A, D.mileStats.c, time);
-                break;
-            case"3000m":
-                points=calcPoints(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, time);
-                break;
-            case"3200m":
-                time = time*1.005;
-                points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, time);
-                break;
-            case"2 mile":
-                points=calcPoints(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, time);
-                break;
-            case"5000m":
-                points=calcPoints(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c,time);
-                break;
-            case"10000m":
-                points=calcPoints(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, time);
-                break;
-
-        }
+        let constant= getConstants(event);
+        console.log(constant);
+        let points=calcPoints(constant.min, constant.A, constant.c, time);
+        console.log(points);
         return points;
     }
 
     const calculateTime=(event, points)=>{
-        let time;
-        switch(event){
-            case "100m":
-                time=calcTime(D.hundredStats.min, D.hundredStats.A, D.hundredStats.c, points);
-                break;
-            case "200m":
-                time=calcTime(D.twoHundredStats.min, D.twoHundredStats.A, D.twoHundredStats.c, points);
-                break;
-            case"300m":
-                time=calcTime(D.threeStats.min, D.threeStats.A, D.threeStats.c, points );
-                break;
-            case"400m":
-                time=calcTime(D.fourStats.min, D.fourStats.A, D.fourStats.c, points);
-                break;
-            case"500m":
-                time=calcTime(D.fiveStats.min, D.fiveStats.A, D.fiveStats.c, points);
-                break;
-            case"600m":
-                time=calcTime(D.sixStats.min, D.sixStats.A, D.sixStats.c, points);
-                break;
-            case"800m":
-                time=calcTime(D.eightStats.min, D.eightStats.A, D.eightStats.c, points);
-                break;
-            case"1000m":
-                time=calcTime(D.kStats.min, D.kStats.A, D.kStats.c, points);
-                break;
-            case"1500m":
-                time=calcTime(D.fifteenStats.min, D.fifteenStats.A, D.fifteenStats.c, points);
-                break;
-            case"1 mile":
-                time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, points);
-                break;
-            case"1600m":
-                time=calcTime(D.mileStats.min, D.mileStats.A, D.mileStats.c, points);
-                time = time/1.005;
-                break;
-            case"3000m":
-                time=calcTime(D.threeKStats.min, D.threeKStats.A, D.threeKStats.c, points);
-                break;
-            case"3200m":
-                time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, points);
-                time = time/1.005;
-                break;
-            case"2 mile":
-                time=calcTime(D.twoMStats.min, D.twoMStats.A, D.twoMStats.c, points);
-                break;
-            case"5000m":
-                time=calcTime(D.fiveKStats.min, D.fiveKStats.A, D.fiveKStats.c, points);
-                break;
-            case"10000m":
-                time=calcTime(D.tenKStats.min, D.tenKStats.A, D.tenKStats.c, points);
-                break;
-        }
+        let constant= getConstants(event);
+        let time=calcTime(constant.min,constant.A, constant.c, points)
         return time;
     }
 
@@ -185,8 +85,8 @@ function Estimator({estResults, setEstResults}){
         <div className="d-flex">
             <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border">
 
-                <div className="card-header bg-dark text-light">
-                    <h4>Estimator</h4>
+                <div className="card-header bg-dark">
+                    <h4 className="pt-1 mb-0 text-light">Estimator</h4>
                 </div>
 
                 <div className="card-body pt-1">
@@ -260,8 +160,8 @@ function Estimator({estResults, setEstResults}){
 
                     <hr className="mt-4"></hr>
 
-                <div className="row align-items-end">
-                    <div className="col-7form-group py-1 pb-3">
+                <div className="row align-items-end ">
+                    <div className="col-7 form-group py-1 pb-0">
                         <label className="form-label " htmlFor="selectEvent1">Event to Estimate</label>
                         <select className="form-control" id="selectEvent1"
                         {...register("eventEstimate",{required:""})}>
@@ -273,16 +173,27 @@ function Estimator({estResults, setEstResults}){
                     </div>
 
                   
-                    <div class="col-5 form-check py-1 pb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Main Event
+                    <div className="col-5 form-check py-1 pb-0">
+                    <input className="form-check-input p-1" type="checkbox" value="" id="mainEvent"/>
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                        Main Event?
                     </label>
                     </div>
                 </div>
 
+                <div className="form-group py-2 pb-3">
+                    
+                   
+                    <input className="m-1"id="men"{...register("gender", { required: true })} type="radio" value="Men's" /> 
+                    <label className="me-5" htmlFor="men">Men</label>
+                   
+                    <input className="m-1" id="women"{...register("gender", { required: true })} type="radio" value="Women's" />
+                    <label className="" htmlFor="women">Women</label>
+                    
+                </div>
+
                     <div className="row">
-                        <button onClick={handleSubmit(onSubmitEstimate)} type="submit" className="btn get col mx-3 mb-2" >Estimate Time</button>
+                        <button onClick={handleSubmit(onSubmitEstimate)} type="submit" className="btn get col mx-3 mb-2 " >Estimate Time</button>
                     </div>
 
                     </form>
