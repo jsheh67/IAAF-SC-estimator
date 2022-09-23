@@ -25,7 +25,7 @@ function EstimatorResultTable({estResults, setEstResults,setResultId}){
     }
 
     return(
-        <div className= "card mt-5 p-0 pb-5 rounded shadow border">
+        <div className= "card mt-1 p-0 pb-5 rounded shadow border">
         
         <div className="card-header bg-secondary bg-gradient pb-0 ">
         <div className="row mb-0 pt-1">

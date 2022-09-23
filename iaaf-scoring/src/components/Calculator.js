@@ -5,6 +5,7 @@ import ResultTable from "./ResultTable";
 import EventSelection from "./EventSelection";
 import * as D from "./Data";
 import {calcPoints, calcTime, convertToSeconds, getConstants } from "./Functions";
+import Description from "./Description";
 
 function Calculator({resultList, setResultList}){
 
@@ -20,7 +21,9 @@ function Calculator({resultList, setResultList}){
 
 
     const onSubmitCalcPoints=(OBJ)=>{
-        
+        if(OBJ.minutes=="" && OBJ.seconds=="" &&OBJ.miliseconds==""){
+         
+        }else{
         OBJ.id=resultId;
         idIncrement();
 
@@ -32,7 +35,9 @@ function Calculator({resultList, setResultList}){
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
+        }
     }
+    
     
 
    
@@ -40,27 +45,32 @@ function Calculator({resultList, setResultList}){
 
 
     const onSubmitCalcTime=(OBJ)=>{
+        if(OBJ.points==""){
 
-        OBJ.id=resultId;
-        idIncrement();
+        }else{
+            OBJ.id=resultId;
+            idIncrement();
 
-        let c= getConstants(OBJ.event);
-        OBJ.time=calcTime(c.min, c.A, c.c, OBJ.points);
+            let c= getConstants(OBJ.event);
+            OBJ.time=calcTime(c.min, c.A, c.c, OBJ.points);
 
-        let timeSeconds = parseFloat(OBJ.time);
-        console.log(timeSeconds);
-        let secs= (timeSeconds%60);
-        OBJ.miliseconds= Math.ceil((secs%1).toFixed(2)*100);
-        OBJ.seconds=Math.floor(secs);
-        OBJ.minutes= Math.floor(timeSeconds/60);
-        console.log(OBJ);
-        setResultList([OBJ,...resultList]);
-        console.log(resultList);
+            let timeSeconds = parseFloat(OBJ.time);
+            console.log(timeSeconds);
+            let secs= (timeSeconds%60);
+            OBJ.miliseconds= Math.ceil((secs%1).toFixed(2)*100);
+            OBJ.seconds=Math.floor(secs);
+            OBJ.minutes= Math.floor(timeSeconds/60);
+            console.log(OBJ);
+            setResultList([OBJ,...resultList]);
+            console.log(resultList);
+        }
     }
        
     return(
+        <>
+        <Description />
         <div className="d-flex  justify-content-start">
-        <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border ">
+        <div className="card col-5 me-4 mt-1 ms-5 rounded shadow border ">
             <div className="card-header bg-secondary bg-gradient">
                 <h4 className="pt-1 mb-0 text-light"> Calculator </h4>
             </div>
@@ -75,6 +85,7 @@ function Calculator({resultList, setResultList}){
                        <EventSelection />
 
                     </select>
+                    {/* {errorMessage()} */}
                     {/* <p className="form-error-message">{errors.types?.message}</p> */}
 
                 </div>
@@ -145,6 +156,7 @@ function Calculator({resultList, setResultList}){
 
 
         </div>
+        </>
     )
 
 

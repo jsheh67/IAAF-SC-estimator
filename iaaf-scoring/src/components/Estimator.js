@@ -5,6 +5,7 @@ import EventSelection from "./EventSelection";
 
 import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants  } from "./Functions";
 import * as D from "./Data";
+import EstimatorDescription from "./EstimatorDescription";
 
 function Estimator({estResults, setEstResults}){
 
@@ -34,8 +35,11 @@ function Estimator({estResults, setEstResults}){
 
 
     const onSubmitEstimate=(OBJ)=>{
-        console.log(OBJ);
+        if(OBJ.minutes1=="" && OBJ.seconds1=="" && OBJ.miliseconds1=="" || 
+            OBJ.minutes2=="" && OBJ.seconds2=="" && OBJ.miliseconds2==""){
 
+        }else{
+        console.log(OBJ);
         OBJ.id = resultId;
         idIncrement();
        
@@ -97,10 +101,13 @@ function Estimator({estResults, setEstResults}){
 
         setEstResults([OBJ, ...estResults]);
     }
+    }
 
     return(
+        <>
+        <EstimatorDescription />
         <div className="d-flex">
-            <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border">
+            <div className="card col-5 me-4 mt-1 ms-5 rounded shadow border">
 
                 <div className="card-header bg-secondary bg-gradient">
                     <h4 className="pt-1 mb-0 text-light">Estimator</h4>
@@ -141,7 +148,7 @@ function Estimator({estResults, setEstResults}){
                         </div>
                     </div>
 
-                    <div class="vr p-0"></div>
+                    <div className="vr p-0"></div>
 
                     <div className="col">
                         <div className="form-group py-1">
@@ -161,7 +168,7 @@ function Estimator({estResults, setEstResults}){
                             <input type="number" aria-label="minutes" className="form-control"
                                 placeholder="mm"
                                 {...register("minutes2")}/>
-                            <span class="input-group-text">:</span>
+                            <span className="input-group-text">:</span>
                             <input type="number" id="time1" aria-label="seconds" className="form-control"
                                 placeholder="ss"
                                 {...register("seconds2")}/>
@@ -227,6 +234,7 @@ function Estimator({estResults, setEstResults}){
             </div>
 
         </div>
+    </>
     )
 }
 export default Estimator;

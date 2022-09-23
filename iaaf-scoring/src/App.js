@@ -7,6 +7,7 @@ import './App.css';
 import { useState } from 'react';
 import { Routes, Route, Navigate} from 'react-router-dom';
 import { useNavigate} from "react-router-dom";
+import Description from './components/Description';
 
 
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <div className="App ">
         <Header />
-
+       
           <Routes>
             <Route path="" element={
               <Calculator 
@@ -30,25 +31,14 @@ function App() {
                 setResultList={setResultList}/>
               }>
             </Route>
-
             <Route path="/estimator" element={
               <Estimator 
                 estResults={estResults}
                 setEstResults={setEstResults}/>
               }>
             </Route>
-
-
           </Routes>
-           
-       
-
         <Footer />
-
-
-  
-
-    
     </div>
   );
 }
