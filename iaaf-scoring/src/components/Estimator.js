@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import EstimatorResultTable from "./EstimatorResultTable";
+import EventSelection from "./EventSelection";
 
 import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants  } from "./Functions";
 import * as D from "./Data";
@@ -16,18 +17,6 @@ function Estimator({estResults, setEstResults}){
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
     });
-
-    const events=["100m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
-                "1600m","1 mile", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
-    
-    const eventSelectionFactory=()=>{
-        return(events.map(e=>{
-            return(<option key={e+"key"} value={e}>{e}</option >)
-        }))
-    } 
-
-  
-    // }
 
     const getPoints=(event, time)=>{
         let constant= getConstants(event);
@@ -85,7 +74,7 @@ function Estimator({estResults, setEstResults}){
         <div className="d-flex">
             <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border">
 
-                <div className="card-header bg-dark">
+                <div className="card-header bg-secondary bg-gradient">
                     <h4 className="pt-1 mb-0 text-light">Estimator</h4>
                 </div>
 
@@ -100,7 +89,7 @@ function Estimator({estResults, setEstResults}){
                         <select className="form-control" id="selectEvent1"
                         {...register("event1",{required:""})}>
 
-                            {eventSelectionFactory()}
+                           <EventSelection />
 
                         </select>
                         {/* <p className="form-error-message">{errors.types?.message}</p> */}
@@ -132,7 +121,7 @@ function Estimator({estResults, setEstResults}){
                         <select className="form-control" id="selectEvent1"
                         {...register("event2",{required:""})}>
 
-                            {eventSelectionFactory()}
+                           <EventSelection />
 
                         </select>
                         {/* <p className="form-error-message">{errors.types?.message}</p> */}
@@ -166,7 +155,7 @@ function Estimator({estResults, setEstResults}){
                         <select className="form-control" id="selectEvent1"
                         {...register("eventEstimate",{required:""})}>
 
-                            {eventSelectionFactory()}
+                            <EventSelection />
 
                         </select>
                         {/* <p className="form-error-message">{errors.types?.message}</p> */}
@@ -198,8 +187,6 @@ function Estimator({estResults, setEstResults}){
 
                     </form>
                 </div>
-
-        
 
             </div>
 

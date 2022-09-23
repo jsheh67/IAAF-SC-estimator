@@ -27,10 +27,10 @@ function EstimatorResultTable({estResults, setEstResults,setResultId}){
     return(
         <div className= "card mt-5 p-0 pb-5 rounded shadow border">
         
-        <div className="card-header bg-dark pb-0 ">
+        <div className="card-header bg-secondary bg-gradient pb-0 ">
         <div className="row mb-0 pt-1">
             <h4 className="col text-light">Results</h4>
-            <button id="clearButton"className="btn btn-sm col bg-dark" onClick={clear}>Clear results?</button>
+            <button id="clearButton"className="btn btn-sm col bg-transparent" onClick={clear}>Clear results?</button>
         </div>
         </div>
 
@@ -55,8 +55,5 @@ function EstimatorResultTable({estResults, setEstResults,setResultId}){
        
         </div>
     )
-
-
-
 }
 export default EstimatorResultTable;

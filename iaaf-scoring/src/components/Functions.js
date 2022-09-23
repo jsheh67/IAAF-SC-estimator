@@ -31,6 +31,7 @@ const functions={
     }
     return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
 },
+    //A bit of an abomination
     getConstants: function(event){
         const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
         const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
@@ -111,7 +112,15 @@ const functions={
         }
         console.log(result)
         return result;
-    }
+    },
+
+    // eventSelectionFactory: function(){
+    //     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
+    //             "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
+    //     return(events.map(e=>{
+    //         return(<option key={e+"key"} value={e}>{e}</option >);
+    //     }))
+    // } 
 }
 
 module.exports= functions

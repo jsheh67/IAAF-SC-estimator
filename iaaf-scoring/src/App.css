@@ -16,6 +16,10 @@ i{
     font-weight: bold;
 }
 
+.nav-link.text-light.text-muted:hover{
+    color: whitesmoke !important;
+}
+
 .col.transition{
     background: linear-gradient,(#212529,#0E6EFD);
 }
@@ -55,13 +59,12 @@ i{
 
 #clearButton{
     background-color: white;
-    color: rgb(159, 159, 159);
+    color: rgb(50, 50, 50);
 }
 
 
 #clearButton:hover{
-    background-color: white;
-    color: rgb(121, 1, 1);
+    color: whitesmoke;
     
 }
 

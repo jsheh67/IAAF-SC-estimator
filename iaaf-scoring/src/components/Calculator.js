@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 
 import ResultTable from "./ResultTable";
+import EventSelection from "./EventSelection";
 import * as D from "./Data";
 import {calcPoints, calcTime, convertToSeconds, getConstants } from "./Functions";
 
@@ -17,15 +18,6 @@ function Calculator({resultList, setResultList}){
         mode: "onChange"
       });
 
-    const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
-                "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
-
-
-    const eventSelectionFactory=()=>{
-        return(events.map(e=>{
-            return(<option key={e+"key"} value={e}>{e}</option >)
-        }))
-    } 
 
     const onSubmitCalcPoints=(OBJ)=>{
         
@@ -69,7 +61,7 @@ function Calculator({resultList, setResultList}){
     return(
         <div className="d-flex  justify-content-start">
         <div className="card col-5 me-4 mt-5 ms-5 rounded shadow border ">
-            <div className="card-header bg-dark">
+            <div className="card-header bg-secondary bg-gradient">
                 <h4 className="pt-1 mb-0 text-light"> Calculator </h4>
             </div>
 
@@ -80,7 +72,7 @@ function Calculator({resultList, setResultList}){
                     <select className="form-control" id="selectEvent"
                     {...register("event",{required:""})}>
 
-                        {eventSelectionFactory()}
+                       <EventSelection />
 
                     </select>
                     {/* <p className="form-error-message">{errors.types?.message}</p> */}

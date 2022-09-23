@@ -1,4 +1,5 @@
 
+const { getConstants } = require("./Functions");
 const functions = require("./Functions");
 
     const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
@@ -70,4 +71,17 @@ describe("Get Distance tests",()=>{
     test("should get 5000 for 5000m",()=>{
         expect(functions.getDistance("5000m")).toBe("5000");
     });
+})
+
+describe("Get constants tests",()=>{
+    test("get mile constants for 1600m",()=>{
+        let mileConst = getConstants("1 mile");
+        let sixteenConst = getConstants("1600m");
+        expect(mileConst).toStrictEqual(sixteenConst)
+    });
+    test("get 2mile constants for 3200m",()=>{
+        let TwoMileConst = getConstants("2 mile");
+        let ThirtyTwonConst = getConstants("3200m");
+        expect(TwoMileConst).toStrictEqual(ThirtyTwonConst);
+    })
 })

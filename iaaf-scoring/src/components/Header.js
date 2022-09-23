@@ -1,20 +1,21 @@
-import {Link, link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Header(){
 
     return(
-        <div className="pt-3 title">
-            <div className="row">
-                <Link to="" className="col p-0">
-                    <h2 className="bg-dark text-light p-3 ps-5 "> IAAF Scoring Calculator</h2>
-                </Link>
-                
 
-                <Link to="/estimator" className="col p-0">
-                    <h2 className="bg-primary text-dark p-3 ps-5 "> Performance Estimator</h2>
-                </Link>
-            </div>
-        </div>
+        <nav className="navbar navbar-expand bg-dark bg-gradient p-2">
+            <Link className="navbar-brand text-light ps-3" to=""><h2>Track-Calculator</h2></Link>
+                <ul className="navbar-nav">
+                <li className="nav-item active">
+                    <Link className="nav-link text-light text-muted" to="">IAAF Scoring </Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link text-light text-muted" to="/estimator" >Time Estimator</Link>
+                </li>
+                </ul>
+        </nav>
+       
     )   
 
 }
