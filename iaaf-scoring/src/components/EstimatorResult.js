@@ -1,3 +1,5 @@
+import{ timeFormater } from  "./Functions";
+
 function EstimatorResult({r, estResults, setEstResults}){
 
 
@@ -6,27 +8,6 @@ function EstimatorResult({r, estResults, setEstResults}){
         const filteredResults = estResults.filter(result => result.id !== r.id);
         setEstResults(filteredResults);
     }
-
-    const timeFormater=(min, sec, mili)=>{
-        let result="";
-        if (min!=0){
-            result+=(min+":")
-        }
-        if((sec.length==1 || sec<10)&& min!=0){
-            result+="0"+sec+"."
-        }else if(sec.length==0){
-            result+="00."
-        }else{
-            result+=sec+".";
-        }
-        if(mili.length==0){
-            result+="0"
-        }
-        result+=mili;
-
-        return result;
-    }
-
 
     return (
         <tr className="resultRow">        

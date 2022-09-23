@@ -34,6 +34,7 @@ function Estimator({estResults, setEstResults}){
 
 
     const onSubmitEstimate=(OBJ)=>{
+        console.log(OBJ);
 
         OBJ.id = resultId;
         idIncrement();
@@ -43,6 +44,10 @@ function Estimator({estResults, setEstResults}){
 
         let distance1=getDistance(OBJ.event1);
         let distance2=getDistance(OBJ.event2);
+
+        let minDistance=Math.min(distance1,distance2);
+        let maxDistance=Math.max(distance1,distance2);
+
         let distanceEstimate=getDistance(OBJ.eventEstimate);
 
 
@@ -52,9 +57,32 @@ function Estimator({estResults, setEstResults}){
         let event2Points=getPoints(OBJ.event2, OBJ.time2);
         console.log(event2Points);
 
+        let minPoints=Math.min(event1Points, event2Points);
+        let maxPoints=Math.max(event1Points, event2Points);
+
         //might re work this-- logistic function maybe?
         let slope =((event1Points-event2Points)/(distance1-distance2))
-        let estimatedPoints = Math.ceil(slope*(distanceEstimate-distance1)+event1Points);
+
+        let estimatedPoints;
+        if(distanceEstimate>maxDistance && slope>0){
+            estimatedPoints=maxPoints;
+        }else if(distanceEstimate<minDistance && slope>0){
+            estimatedPoints=minPoints;
+        }else if(distanceEstimate>maxDistance && slope<0){
+            estimatedPoints=minPoints;
+        }else if(distanceEstimate<minPoints && slope<0){
+            estimatedPoints=maxPoints;
+        }else{
+            estimatedPoints = Math.round(slope*(distanceEstimate-distance1)+event1Points);
+        }
+        
+
+
+        console.log(estimatedPoints);
+        if(OBJ.main===true){
+            estimatedPoints+=25;
+        }
+        console.log(estimatedPoints);
 
         let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints);
         console.log(estimatedTime);
@@ -163,7 +191,9 @@ function Estimator({estResults, setEstResults}){
 
                   
                     <div className="col-5 form-check py-1 pb-0">
-                    <input className="form-check-input p-1" type="checkbox" value="" id="mainEvent"/>
+                    <input className="form-check-input p-1" type="checkbox" value="" id="mainEvent"
+                    {...register("main")}/>
+
                     <label className="form-check-label" htmlFor="flexCheckDefault">
                         Main Event?
                     </label>
@@ -171,8 +201,6 @@ function Estimator({estResults, setEstResults}){
                 </div>
 
                 <div className="form-group py-2 pb-3">
-                    
-                   
                     <input className="m-1"id="men"{...register("gender", { required: true })} type="radio" value="Men's" /> 
                     <label className="me-5" htmlFor="men">Men</label>
                    
@@ -194,6 +222,7 @@ function Estimator({estResults, setEstResults}){
                 <EstimatorResultTable 
                     estResults={estResults}
                     setEstResults={setEstResults}
+                    setResultId={setResultId}
                 />
             </div>
 

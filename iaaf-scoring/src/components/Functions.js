@@ -100,6 +100,27 @@ const functions={
         return stats;
     },
 
+    timeFormater: function(min, sec, mili){
+        let result="";
+        if (min!=0){
+            result+=(min+":")
+        }
+        if((sec.length==1 || sec<10) && sec!="" && min!=0){
+            result+="0"+sec+"."
+        }
+        else if(sec.length==0){
+            result+="00."
+        }else{
+            result+=sec+".";
+        }
+        if(mili.length==0){
+            result+="0"
+        }
+        result+=mili;
+
+        return result;
+    },
+
 //---ESTIMATOR---------------
     getDistance: function(distance){
         let result=0;
@@ -112,15 +133,7 @@ const functions={
         }
         console.log(result)
         return result;
-    },
-
-    // eventSelectionFactory: function(){
-    //     const events=["100 m","200m","300m","400m","500m","600m","800m","1000m", "1500m", 
-    //             "1600m","1 mile", "2000m", "3000m","3200m" ,"2 mile", "5000m", "10000m" ];
-    //     return(events.map(e=>{
-    //         return(<option key={e+"key"} value={e}>{e}</option >);
-    //     }))
-    // } 
+    }
 }
 
 module.exports= functions
