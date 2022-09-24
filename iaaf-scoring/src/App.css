@@ -21,11 +21,11 @@ i{
 }
 
 .dark-mode #header{
-    background: rgb(40, 45, 47);
+    background: rgb(40, 45, 47) !important;
 }
 
 .dark-mode #header2{
-    background: rgb(25, 30, 32) ;
+    background: rgb(42, 44, 44) !important;
 }
 
 .dark-mode .card{
@@ -41,18 +41,28 @@ i{
 }
 
 .dark-mode .form-control{
-    background-color: rgb(76, 76, 76);
+    background-color: #616161;
     border: #040303;
     color: whitesmoke;
 }
 .dark-mode .input-group-text{
-    background-color: rgb(76, 76, 76);
+    background-color: #616161;
     border: #040303;
     color: whitesmoke;
 }
 
 .dark-mode table{
     color: whitesmoke;
+}
+
+.dark-mode #remove{
+    background-color: #4f4f4f;
+    border: solid black 0px;
+}
+
+.dark-mode #remove:hover{
+    background-color: rgb(95, 95, 95);
+    border: solid black 0px;
 }
 
 
