@@ -5,16 +5,20 @@ input::-webkit-inner-spin-button {
 }
 
 i{
-    color: black;
+    color: whitesmoke;
     scale: 2;
 }
 /* footer{
     position: sticky;
 } */
 
-/* .overallBG{
-    background-color: #fbfff2;
-} */
+.overallBG{
+    background-color: #f8f8f8;
+}
+.dark-mode{
+    background-color: #353535;
+}
+
 /* .card-body{
     background-color: #fbfff2;
 } */
@@ -25,10 +29,6 @@ i{
 
 .nav-link.text-light:hover{
     color: #F7DD04 !important;
-}
-
-.col.transition{
-    background: linear-gradient,(#212529,#0E6EFD);
 }
 
 .form-control{
@@ -88,6 +88,19 @@ i{
 }
 #remove:hover{
     background-color: #DEE2E6;
+}
+#darkToggle{
+    position: fixed;
+    right: 2rem;
+}
+
+#flexSwitchCheck{
+    background-color: rgb(104, 104, 104);
+}
+
+#modeToggle{
+    background-color: transparent;
+    border: none;
 }
 
 
