@@ -151,6 +151,19 @@ const functions={
         console.log(result)
         return result;
     }
+    //  getPoints: function(event, time, gender){
+    //     let constant= getConstants(event, gender);
+    //     console.log(constant);
+    //     let points=calcPoints(constant.min, constant.A, constant.c, time);
+    //     console.log(points);
+    //     return points;
+    // },
+
+    // getTime: function(event, points, gender){
+    //     let constant= getConstants(event, gender);
+    //     let time=calcTime(constant.min,constant.A, constant.c, points)
+    //     return time;
+    // }
 }
 
 module.exports= functions

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import EstimatorResultTable from "./EstimatorResultTable";
 import EventSelection from "./EventSelection";
 
-import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants  } from "./Functions";
+import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants, getPoints, getTime  } from "./Functions";
 import * as D from "./Data";
 import EstimatorDescription from "./EstimatorDescription";
 
@@ -25,13 +25,13 @@ function Estimator({estResults, setEstResults}){
         let points=calcPoints(constant.min, constant.A, constant.c, time);
         console.log(points);
         return points;
-    }
+    };
 
-    const calculateTime=(event, points, gender)=>{
+    const getTime=(event, points, gender)=>{
         let constant= getConstants(event, gender);
         let time=calcTime(constant.min,constant.A, constant.c, points)
         return time;
-    }
+    };
 
 
     const onSubmitEstimate=(OBJ)=>{
@@ -88,13 +88,16 @@ function Estimator({estResults, setEstResults}){
         }
         console.log(estimatedPoints);
 
-        let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints,OBJ.gender);
+        let estimatedTime = getTime(OBJ.eventEstimate, estimatedPoints,OBJ.gender);
         console.log(estimatedTime);
 
         let timeSeconds = parseFloat(estimatedTime);
         console.log(timeSeconds);
         let secs= (timeSeconds%60);
-        OBJ.EstimateMiliseconds= Math.ceil((secs%1).toFixed(2)*100);
+        let array = timeSeconds.toString().split(".");
+        console.log(array);
+        OBJ.EstimateMiliseconds=array[1]; 
+
         OBJ.EstimateSeconds=Math.floor(secs);
         OBJ.EstimateMinutes= Math.floor(timeSeconds/60);
         console.log(OBJ);
