@@ -26,22 +26,14 @@ function Calculator({resultList, setResultList}){
         }else{
         OBJ.id=resultId;
         idIncrement();
-
         OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
-
-        let c= getConstants(OBJ.event);
+        let c= getConstants(OBJ.event,OBJ.gender);
         OBJ.points = calcPoints(c.min, c.A, c.c, OBJ.time);
-
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
         }
     }
-    
-    
-
-   
-    // formatTime(131.5);
 
 
     const onSubmitCalcTime=(OBJ)=>{
@@ -51,7 +43,7 @@ function Calculator({resultList, setResultList}){
             OBJ.id=resultId;
             idIncrement();
 
-            let c= getConstants(OBJ.event);
+            let c= getConstants(OBJ.event,OBJ.gender);
             OBJ.time=calcTime(c.min, c.A, c.c, OBJ.points);
 
             let timeSeconds = parseFloat(OBJ.time);

@@ -65,6 +65,18 @@ i{
     border: solid black 0px;
 }
 
+.dark-mode p{
+    color: #868686;
+}
+
+.dark-mode a{
+    color: #575757;
+}
+
+.dark-mode a:hover{
+    color: #323d57;
+}
+
 
 .dark-mode .get{
     background-color: rgb(79, 79, 79) !important;

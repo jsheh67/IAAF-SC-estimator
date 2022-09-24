@@ -19,16 +19,16 @@ function Estimator({estResults, setEstResults}){
         mode: "onChange"
     });
 
-    const getPoints=(event, time)=>{
-        let constant= getConstants(event);
+    const getPoints=(event, time, gender)=>{
+        let constant= getConstants(event, gender);
         console.log(constant);
         let points=calcPoints(constant.min, constant.A, constant.c, time);
         console.log(points);
         return points;
     }
 
-    const calculateTime=(event, points)=>{
-        let constant= getConstants(event);
+    const calculateTime=(event, points, gender)=>{
+        let constant= getConstants(event, gender);
         let time=calcTime(constant.min,constant.A, constant.c, points)
         return time;
     }
@@ -55,10 +55,10 @@ function Estimator({estResults, setEstResults}){
         let distanceEstimate=getDistance(OBJ.eventEstimate);
 
 
-        let event1Points=getPoints(OBJ.event1, OBJ.time1);
+        let event1Points=getPoints(OBJ.event1, OBJ.time1,OBJ.gender);
         console.log(event1Points);
 
-        let event2Points=getPoints(OBJ.event2, OBJ.time2);
+        let event2Points=getPoints(OBJ.event2, OBJ.time2,OBJ.gender);
         console.log(event2Points);
 
         let minPoints=Math.min(event1Points, event2Points);
@@ -88,7 +88,7 @@ function Estimator({estResults, setEstResults}){
         }
         console.log(estimatedPoints);
 
-        let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints);
+        let estimatedTime = calculateTime(OBJ.eventEstimate, estimatedPoints,OBJ.gender);
         console.log(estimatedTime);
 
         let timeSeconds = parseFloat(estimatedTime);

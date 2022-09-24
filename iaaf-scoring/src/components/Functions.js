@@ -6,7 +6,7 @@ const functions={
     if(time>min){
         return 0;
     }else{
-        return Math.ceil(a*(Math.pow((Math.abs(time-min)),c)));
+        return Math.round(a*(Math.pow((Math.abs(time-min)),c)));
     }
 },
 
@@ -32,7 +32,9 @@ const functions={
     return (parseFloat(min*60 + sec+ (mili)/Math.pow(10,length)));
 },
     //A bit of an abomination
-    getConstants: function(event){
+    getConstants: function(event,gender){
+        const isWomen=(gender!=="Women's");
+
         const hundredStats={"min":16.96, "A":25.5987, "c":1.986}
         const twoHundredStats={"min":35.447, "A":5.2215, "c":1.99238}
         const threeStats={"min":57.169, "A":1.85, "c":1.9971}
@@ -47,54 +49,69 @@ const functions={
         const twoMStats={"min":896.2759, "A":0.0102747, "c":1.94368}
         const fiveKStats ={"min":1422.77, "A":0.00463078, "c":1.92909} 
         const tenKStats={"min":3114.21, "A":0.0008763, "c":1.93606}
+
+        const whundredStats={"min":21.99, "A":9.9315, "c":2}
+        const wtwoHundredStats={"min":45.49657, "A":2.2412, "c":2}
+        const wthreeStats={"min":76.9969, "A":0.69989, "c":2}
+        const wfourStats={"min":109.99055, "A":0.335053765, "c":2}
+        const wfiveStats={"min":145.49325, "A":0.187607, "c":2}
+        const wsixStats={"min":179.991599, "A":0.129012, "c":2}
+        const weightStats={"min":249.99568, "A":0.2341, "c":2}
+        const wkStats={"min":330, "A":0.03819848, "c":2} // could use some work sumsq kinda high here
+        const wfifteenStats={"min":540.0278, "A":0.011651, "c":2}
+        const wmileStats={"min":579.98704, "A":0.04853, "c":2} 
+        const wthreeKStats ={"min":1200, "A":0.0025389499, "c":2} 
+        const wtwoMStats={"min":1297.308, "A":0.002150606, "c":2}
+        const wfiveKStats ={"min":2101.8472781, "A":0.000805319, "c":2} 
+        const wtenKStats={"min":4501.847, "A":0.00017094, "c":2}
         let stats;
         switch(event){
             case "100m":
-                stats=hundredStats;
+                stats= isWomen? hundredStats: whundredStats;
                 break;
             case "200m":
-                stats=twoHundredStats;
+                stats= isWomen? twoHundredStats:wtwoHundredStats;
                 break;
             case"300m":
-                stats=threeStats;
+                stats= isWomen? threeStats:wthreeStats;
                 break;
             case"400m":
-                stats=fourStats;
+                stats=isWomen?fourStats:wfourStats;
                 break;
             case"500m":
-                stats=fiveStats;
+                stats=isWomen?fiveStats:wfiveStats;
                 break;
             case"600m":
-                stats=sixStats;
+                stats=isWomen?sixStats:wsixStats;
                 break;
             case"800m":
-                stats=eightStats;
+                stats=isWomen?eightStats:weightStats;
                 break;
             case"1000m":
-                stats=kStats;
+                stats=isWomen?kStats:wkStats;
                 break;
             case"1500m":
-                stats=fifteenStats;
+                stats=isWomen?fifteenStats:wfifteenStats;
             case"1600m":
-                stats=mileStats;
+                stats=isWomen?mileStats:wmileStats;
                 break;
             case"1 mile":
-                stats=mileStats;
+                stats=isWomen?mileStats:wmileStats;
                 break;
             case"3000m":
-                stats=threeKStats;
+                stats=isWomen?threeKStats:wthreeKStats;
                 break;
             case"3200m":
-                stats=twoMStats;
+                stats=isWomen?twoMStats:wtwoMStats;
                 break;
             case"2 mile":
-                stats=twoMStats;
+                stats=isWomen?twoMStats:wtwoMStats;
                 break;
             case"5000m":
-                stats=fiveKStats;
+                stats=isWomen?fiveKStats:wfiveKStats;
                 break;
             case"10000m":
-                stats=tenKStats;
+                stats=isWomen?tenKStats:wtenKStats;
                 break;
         }
         return stats;

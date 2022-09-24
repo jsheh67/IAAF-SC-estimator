@@ -38,11 +38,11 @@ function EstimatorResultTable({estResults, setEstResults,setResultId}){
         <table className="table ">
             <thead>
                 <tr>
-                    <th colspan="2" scope="col">Event 1</th>
+                    <th className="text-muted" colSpan="2" scope="col">Event 1</th>
                    
-                    <th colspan="2" scope="col">Event 2</th>
+                    <th className="text-muted" colSpan="2" scope="col">Event 2</th>
 
-                    <th colspan="2" scope="col">Estimation</th>
+                    <th colSpan="2" scope="col">Estimation</th>
                     
                     <th></th>       
                 </tr>

@@ -11,22 +11,22 @@ function EstimatorResult({r, estResults, setEstResults}){
 
     return (
         <tr className="resultRow">        
-            <td>
+            <td className="text-muted">
                 {r.event1}
             </td>
 
-            <td>
+            <td className="text-muted">
                 {timeFormater(r.minutes1, r.seconds1, r.miliseconds1)}
                 {/* {r.minutes1==0 ? "" :(r.minutes1+":")}
                 {(r.seconds1<10 && r.minutes1!=0)?"0"+r.seconds1:r.seconds1}
                 {r.miliseconds1==0?".0":("."+r.miliseconds1)} */}
             </td>
 
-            <td>
+            <td className="text-muted">
                 {r.event2}
             </td>
 
-            <td>
+            <td className="text-muted">
                {timeFormater(r.minutes2, r.seconds2, r.miliseconds2)}
             </td>
 
