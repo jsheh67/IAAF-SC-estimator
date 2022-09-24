@@ -107,7 +107,7 @@ function Estimator({estResults, setEstResults}){
         <>
         <EstimatorDescription />
         <div className="d-flex">
-            <div className="card col-5 me-4 mt-1 ms-5 rounded shadow border">
+            <div className="card col-5 me-4 mt-1 ms-5 rounded shadow ">
 
                 <div id="header2" className="card-header  bg-gradient">
                     <h4 className="pt-1 mb-0 text-light">Estimator</h4>
