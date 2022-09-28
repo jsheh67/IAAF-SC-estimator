@@ -7,16 +7,8 @@ import Message from './components/Message';
 import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useNavigate} from "react-router-dom";
-import Description from './components/Description';
-
-
 
 function App() {
-  // const navigate = useNavigate();
-
-  // const[currentEvent, setCurrentEvent]= useState({});
-  // const[currentTime, setCurrentTime]= useState({});
   const[resultList, setResultList]=useState([]);
   const[estResults, setEstResults]=useState([]);
   const[darkMode, setDarkMode] = useState(false);
@@ -27,8 +19,6 @@ function App() {
     const messageAlert= document.getElementById('messages');
     messageAlert.setAttribute('class', 'alert alert-dismissible fade show p-3 mb-0' );
   }
-
-
 
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
@@ -66,6 +56,7 @@ function App() {
                 />
               }>
             </Route>
+
             <Route path="/estimator" element={
               <Estimator 
                 estResults={estResults}

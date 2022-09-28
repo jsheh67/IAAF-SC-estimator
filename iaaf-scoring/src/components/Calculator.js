@@ -18,9 +18,29 @@ function Calculator({resultList, setResultList, showMessages}){
         mode: "onChange"
       });
 
+    const clearForm=()=>{
+        setValue("minutes","");
+        setValue("seconds","");
+        setValue("miliseconds","");
+        setValue("points","");
+    }
+
+    const validateTime=(OBJ)=>{
+       const regex = new RegExp('[^0-9]');
+       return(regex.test(OBJ.minutes)||regex.test(OBJ.seconds)||(regex.test(OBJ.miliseconds)) )
+    }
+
+    const validatePoints=(OBJ)=>{
+        const regex = new RegExp('[^0-9]');
+        return(regex.test(OBJ.points));
+     }
+
 
     const onSubmitCalcPoints=(OBJ)=>{
-        if(OBJ.minutes=="" && OBJ.seconds=="" &&OBJ.miliseconds==""){
+        if(validateTime(OBJ)===true){
+            showMessages("Time fields must only include whole numbers");
+        
+        }else if(OBJ.minutes=="" && OBJ.seconds=="" &&OBJ.miliseconds==""){
          showMessages("Enter time to calculate points");
         }else if(OBJ.gender==null){
             showMessages("Select gender");
@@ -34,12 +54,15 @@ function Calculator({resultList, setResultList, showMessages}){
         console.log(OBJ);
         setResultList([OBJ,...resultList]);
         console.log(resultList);
+        clearForm();
         }
     }
 
 
     const onSubmitCalcTime=(OBJ)=>{
-        if(OBJ.points==""){
+        if(validatePoints(OBJ)==true){
+            showMessages("Points entry must only include whole numbers")
+        }else if(OBJ.points==""){
             showMessages("Enter points to calculate time");
         }else if(OBJ.gender==null){
             showMessages("Select gender");
@@ -60,6 +83,7 @@ function Calculator({resultList, setResultList, showMessages}){
             console.log(OBJ);
             setResultList([OBJ,...resultList]);
             console.log(resultList);
+            clearForm();
         }
     }
        
@@ -88,8 +112,7 @@ function Calculator({resultList, setResultList, showMessages}){
                 </div>
 
                 <div className="form-group ">
-                    
-                   
+                     
                     <input className="m-1"id="men"{...register("gender")} type="radio" value="Men's" /> 
                     <label className="me-5" htmlFor="men">Men</label>
                    
@@ -109,18 +132,19 @@ function Calculator({resultList, setResultList, showMessages}){
                 <div className="form-group col-6">  
                 <div className="input-group ">
                     <input id="min" type="number" aria-label="minutes" className="form-control"
-                        placeholder="mm"
+                        placeholder="mm" 
                          {...register("minutes")}/>
                     <span className="input-group-text">:</span>
                     <input id="sec" type="number" aria-label="seconds" className="form-control"
-                        placeholder="ss"
+                        placeholder="ss" 
                         {...register("seconds")}/>
                         
                     <span className="input-group-text">.</span>
                     <input id="ms" type="number" aria-label="miliseconds" className="form-control"
-                        placeholder="ms"
+                        placeholder="ms" 
                         {...register("miliseconds")}/>
                 </div>
+                  <p className="form-error-message">{errors.types?.message}</p>
                 </div>
             
                 <div className="form-group pb-3 col-5 offset-1">

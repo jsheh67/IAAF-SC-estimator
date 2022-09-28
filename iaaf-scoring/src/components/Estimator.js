@@ -3,7 +3,7 @@ import { useState } from 'react';
 import EstimatorResultTable from "./EstimatorResultTable";
 import EventSelection from "./EventSelection";
 
-import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants, getPoints, getTime  } from "./Functions";
+import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants } from "./Functions";
 import EstimatorDescription from "./EstimatorDescription";
 
 function Estimator({estResults, setEstResults, showMessages}){
@@ -17,6 +17,11 @@ function Estimator({estResults, setEstResults, showMessages}){
     const { register, handleSubmit, setValue,formState: { errors } } = useForm({
         mode: "onChange"
     });
+
+    const clearForm=()=>{
+        let fields=["minutes1", "seconds1", "miliseconds1","minutes2", "seconds2", "miliseconds2"];
+        fields.forEach(f=> setValue(f,""));
+    }
 
     const getPoints=(event, time, gender)=>{
         let constant= getConstants(event, gender);
@@ -34,8 +39,8 @@ function Estimator({estResults, setEstResults, showMessages}){
 
 
     const onSubmitEstimate=(OBJ)=>{
-        if(OBJ.minutes1=="" && OBJ.seconds1=="" && OBJ.miliseconds1=="" || 
-            OBJ.minutes2=="" && OBJ.seconds2=="" && OBJ.miliseconds2==""){
+        if((OBJ.minutes1=="" && OBJ.seconds1=="" && OBJ.miliseconds1=="") || 
+            (OBJ.minutes2=="" && OBJ.seconds2=="" && OBJ.miliseconds2=="")){
             showMessages("Enter times for two events");
         }else if(OBJ.gender==null){
             showMessages("Select gender");
@@ -106,6 +111,7 @@ function Estimator({estResults, setEstResults, showMessages}){
         console.log(OBJ);
 
         setEstResults([OBJ, ...estResults]);
+        clearForm();
     }
     }
 
