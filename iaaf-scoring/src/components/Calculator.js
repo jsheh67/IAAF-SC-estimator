@@ -3,11 +3,10 @@ import { useState } from 'react';
 
 import ResultTable from "./ResultTable";
 import EventSelection from "./EventSelection";
-import * as D from "./Data";
 import {calcPoints, calcTime, convertToSeconds, getConstants } from "./Functions";
 import Description from "./Description";
 
-function Calculator({resultList, setResultList}){
+function Calculator({resultList, setResultList, showMessages}){
 
     const[resultId, setResultId]= useState(1);
 
@@ -22,8 +21,11 @@ function Calculator({resultList, setResultList}){
 
     const onSubmitCalcPoints=(OBJ)=>{
         if(OBJ.minutes=="" && OBJ.seconds=="" &&OBJ.miliseconds==""){
-         
-        }else{
+         showMessages("Enter time to calculate points");
+        }else if(OBJ.gender==null){
+            showMessages("Select gender");
+        }
+        else{
         OBJ.id=resultId;
         idIncrement();
         OBJ.time= convertToSeconds(OBJ.minutes, OBJ.seconds, OBJ.miliseconds);
@@ -38,8 +40,11 @@ function Calculator({resultList, setResultList}){
 
     const onSubmitCalcTime=(OBJ)=>{
         if(OBJ.points==""){
-
-        }else{
+            showMessages("Enter points to calculate time");
+        }else if(OBJ.gender==null){
+            showMessages("Select gender");
+        }
+        else{
             OBJ.id=resultId;
             idIncrement();
 
@@ -85,10 +90,10 @@ function Calculator({resultList, setResultList}){
                 <div className="form-group ">
                     
                    
-                    <input className="m-1"id="men"{...register("gender", { required: true })} type="radio" value="Men's" /> 
+                    <input className="m-1"id="men"{...register("gender")} type="radio" value="Men's" /> 
                     <label className="me-5" htmlFor="men">Men</label>
                    
-                    <input className="m-1" id="women"{...register("gender", { required: true })} type="radio" value="Women's" />
+                    <input className="m-1" id="women"{...register("gender")} type="radio" value="Women's" />
                     <label className=""htmlFor="women">Women</label>
                     
                 </div>

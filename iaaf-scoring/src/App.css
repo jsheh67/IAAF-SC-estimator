@@ -177,6 +177,18 @@ i{
     border: none;
 }
 
+#messages{
+    background-color: #212529 ;
+    color: #F8F9FA ;
+
+    border-top-left-radius:0px;
+    border-top-right-radius:0px
+}
+
+.dark-mode #messages{
+    background-color: #d5d5d5 ;
+    color: #040303 ;
+}
 
 
 

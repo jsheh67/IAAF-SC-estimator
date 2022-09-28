@@ -4,10 +4,9 @@ import EstimatorResultTable from "./EstimatorResultTable";
 import EventSelection from "./EventSelection";
 
 import { getDistance, calcPoints, calcTime, convertToSeconds, getConstants, getPoints, getTime  } from "./Functions";
-import * as D from "./Data";
 import EstimatorDescription from "./EstimatorDescription";
 
-function Estimator({estResults, setEstResults}){
+function Estimator({estResults, setEstResults, showMessages}){
 
     const[resultId, setResultId]= useState(1);
 
@@ -37,8 +36,12 @@ function Estimator({estResults, setEstResults}){
     const onSubmitEstimate=(OBJ)=>{
         if(OBJ.minutes1=="" && OBJ.seconds1=="" && OBJ.miliseconds1=="" || 
             OBJ.minutes2=="" && OBJ.seconds2=="" && OBJ.miliseconds2==""){
-
-        }else{
+            showMessages("Enter times for two events");
+        }else if(OBJ.gender==null){
+            showMessages("Select gender");
+        }
+        
+        else{
         console.log(OBJ);
         OBJ.id = resultId;
         idIncrement();
@@ -211,10 +214,10 @@ function Estimator({estResults, setEstResults}){
                 </div>
 
                 <div className="form-group py-2 pb-3">
-                    <input className="m-1"id="men"{...register("gender", { required: true })} type="radio" value="Men's" /> 
+                    <input className="m-1"id="men"{...register("gender" )} type="radio" value="Men's" /> 
                     <label className="me-5" htmlFor="men">Men</label>
                    
-                    <input className="m-1" id="women"{...register("gender", { required: true })} type="radio" value="Women's" />
+                    <input className="m-1" id="women"{...register("gender")} type="radio" value="Women's" />
                     <label className="" htmlFor="women">Women</label>
                     
                 </div>
