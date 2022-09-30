@@ -14,6 +14,9 @@ function Header({darkMode, setDarkMode}){
                 <li className="nav-item">
                     <Link className="nav-link text-light " to="/estimator" >Time Estimator</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link text-light " to="/wind_altitude_conversion" >Wind and Altitide</Link>
+                </li>
                 </ul>
              
 

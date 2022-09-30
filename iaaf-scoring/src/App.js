@@ -7,6 +7,7 @@ import Message from './components/Message';
 import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import WindConversion from './components/WindConversion';
 
 function App() {
   const[resultList, setResultList]=useState([]);
@@ -64,6 +65,12 @@ function App() {
                 showMessages={showMessages}/>
               }>
             </Route>
+
+            <Route path="/wind_altitude_conversion" element={
+              <WindConversion />
+            }>
+            </Route>
+
           </Routes>
         <Footer />
     </div>
