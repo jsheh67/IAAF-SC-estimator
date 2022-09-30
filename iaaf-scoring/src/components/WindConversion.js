@@ -6,7 +6,7 @@ function WindConversion(){
         mode: "onChange"
       });
 
-      const[resultList, setResultList]=useState([]);
+    const[windResultList, setWindResultList]=useState([]);
 
     const events=["100m", "200m"];
 
@@ -17,22 +17,32 @@ function WindConversion(){
     } 
 
     const windAltConversion100m=(time, wind, Alt)=>{
-        return (time*(1.027 - 0.027 (Math.exp(-0.000125 * Alt))(1-(wind*time)/100)**2)).toFixed(2);
+        return (time*(1.028 - 0.028 * (Math.exp(-0.000125 * Alt))*(1-(wind*time)/100)**2)).toFixed(2);
     }
 
     const windAltConversion200m=(time, wind, Alt)=>{
-        return (time*(1.0441464 - 0.0441464 (Math.exp(-0.000125 * Alt))(1-(wind*time)/592.5339)**2)).toFixed(2);
+        return (time*(1.0441464 - 0.0441464*(Math.exp(-0.000125 * Alt))*(1-(wind*time)/592.5339)**2)).toFixed(2);
     }
 
     const onSubmitCalcTime=(OBJ)=>{
-        switch(OBJ.event){
+        switch (OBJ.event){
             case "100m":
-                setValue
+                OBJ.zzTime=windAltConversion100m(OBJ.time, OBJ.wind, OBJ.altitude)
+                OBJ.maxWTime=windAltConversion100m(OBJ.zzTime, -2 , OBJ.altitude)
+                OBJ.maxMaxTime= (windAltConversion100m(OBJ.zzTime, -2 , 2500))
+                
                 break;
             case "200m":
+                OBJ.zzTime=windAltConversion200m(OBJ.time, OBJ.wind, OBJ.altitude)
+                OBJ.maxWTime=windAltConversion200m(OBJ.zzTime, -2, OBJ.altitude)
+                OBJ.maxMaxTime= (windAltConversion200m(OBJ.zzTime, -2, 2500))
+                break;
 
         }
+        console.log(OBJ);
+        setWindResultList([OBJ,...windResultList]);
     }
+    
 
 
 
@@ -64,13 +74,20 @@ function WindConversion(){
                 </div>
 
                 <div className="form-group pb-3 col-5 offset-1">
-                    <label className="form-label" htmlFor="wind-speed">Time</label>
-                    <input type="number" id="wind-speed" className="form-control" placeholder="m/s"
+                    <label className="form-label" htmlFor="altitude">altitude</label>
+                    <input type="number" id="altitude" className="form-control" placeholder="m/s"
+                        {...register("altitude")}/>
+
+                </div>
+
+                <div className="form-group pb-3 col-5 offset-1">
+                    <label className="form-label" htmlFor="time">Time</label>
+                    <input type="number" id="time" className="form-control" placeholder="m/s"
                         {...register("time")}/>
 
                 </div>
 
-                <button  id="calcTime" onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn "> Time</button>
+                <button  id="calcTime" onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn "> calc</button>
 
 
             </form>
