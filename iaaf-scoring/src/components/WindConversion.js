@@ -29,13 +29,13 @@ function WindConversion(){
             case "100m":
                 OBJ.zzTime=windAltConversion100m(OBJ.time, OBJ.wind, OBJ.altitude)
                 OBJ.maxWTime=windAltConversion100m(OBJ.zzTime, -2 , OBJ.altitude)
-                OBJ.maxMaxTime= (windAltConversion100m(OBJ.zzTime, -2 , 2500))
+                // OBJ.maxMaxTime= (windAltConversion100m(OBJ.zzTime, -2 , 2500))
                 
                 break;
             case "200m":
                 OBJ.zzTime=windAltConversion200m(OBJ.time, OBJ.wind, OBJ.altitude)
                 OBJ.maxWTime=windAltConversion200m(OBJ.zzTime, -2, OBJ.altitude)
-                OBJ.maxMaxTime= (windAltConversion200m(OBJ.zzTime, -2, 2500))
+                // OBJ.maxMaxTime= (windAltConversion200m(OBJ.zzTime, -2, 2500))
                 break;
 
         }
@@ -67,6 +67,13 @@ function WindConversion(){
                 </select>
 
                 <div className="form-group pb-3 col-5 offset-1">
+                    <label className="form-label" htmlFor="time">Time</label>
+                    <input type="number" id="time" className="form-control" placeholder="ss.ms"
+                        {...register("time")}/>
+
+                </div>
+
+                <div className="form-group pb-3 col-5 offset-1">
                     <label className="form-label" htmlFor="wind-speed">Wind speed</label>
                     <input type="number" id="wind-speed" className="form-control" placeholder="m/s"
                         {...register("wind")}/>
@@ -75,17 +82,12 @@ function WindConversion(){
 
                 <div className="form-group pb-3 col-5 offset-1">
                     <label className="form-label" htmlFor="altitude">altitude</label>
-                    <input type="number" id="altitude" className="form-control" placeholder="m/s"
+                    <input type="number" id="altitude" className="form-control" placeholder="m"
                         {...register("altitude")}/>
 
                 </div>
 
-                <div className="form-group pb-3 col-5 offset-1">
-                    <label className="form-label" htmlFor="time">Time</label>
-                    <input type="number" id="time" className="form-control" placeholder="m/s"
-                        {...register("time")}/>
-
-                </div>
+        
 
                 <button  id="calcTime" onClick={handleSubmit(onSubmitCalcTime)}type="submit" className="btn "> calc</button>
 

@@ -66,10 +66,10 @@ function App() {
               }>
             </Route>
 
-            <Route path="/wind_altitude_conversion" element={
+            {/* <Route path="/wind_altitude_conversion" element={
               <WindConversion />
             }>
-            </Route>
+            </Route> */}
 
           </Routes>
         <Footer />
