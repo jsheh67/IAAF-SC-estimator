@@ -7,13 +7,14 @@ import org.testng.annotations.*;
 
 public class test {
     public WebDriver driver;
-    public void checkScore(Integer min, Integer sec, Integer ms, String expected){
+    public void checkScore(Integer min, Integer sec, Integer ms, String expected) throws InterruptedException {
         driver.findElement(By.id("men")).click();
         driver.findElement(By.id("min")).sendKeys(String.valueOf(min));
         driver.findElement(By.id("sec")).sendKeys(String.valueOf(sec));
         driver.findElement(By.id("ms")).sendKeys(String.valueOf(ms));
         driver.findElement(By.id("calcPoints")).click();
-        String result= driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td[3]")).getText();
+        Thread.sleep(100);
+        String result= driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/table/tbody/tr[1]/td[3]")).getText();
         //1400 is score from iaaf tables;
         Assert.assertEquals(expected,result);
     }
@@ -22,7 +23,8 @@ public class test {
         driver.findElement(By.id("men")).click();
         driver.findElement(By.id("points")).sendKeys(String.valueOf(points));
         driver.findElement(By.id("calcTime")).click();
-        String time= driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td[2]")).getText();
+        Thread.sleep(100);
+        String time= driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/table/tbody/tr[1]/td[2]")).getText();
         Assert.assertEquals(time, expected);
     }
 
@@ -40,8 +42,9 @@ public class test {
         Assert.assertEquals(driver.getCurrentUrl(), "http://localhost:3000/");
     }
     @Test
-    public void navigateToEstimator(){
-        driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/a[2]/h2")).click();
+    public void navigateToEstimator() throws InterruptedException {
+        Thread.sleep(100);
+        driver.findElement(By.xpath("/html/body/div[1]/div/nav/ul/li[2]/a")).click();
         String estimatorURl= driver.getCurrentUrl();
         Assert.assertEquals(estimatorURl,"http://localhost:3000/estimator");
     }
@@ -56,12 +59,12 @@ public class test {
 
 //---calculating points---------------
     @Test
-    public void checkMax100m(){
+    public void checkMax100m() throws InterruptedException {
         checkScore(null,9,46, "1400");
     }
 
     @Test
-    public void checkMin100m(){
+    public void checkMin100m() throws InterruptedException {
         checkScore(null,20,46, "0");
     }
 
